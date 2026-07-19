@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500" role="img" aria-label="Questions for OGE preview">
+  <defs><linearGradient id="button" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#818CF8"/><stop offset="1" stop-color="#A78BFA"/></linearGradient></defs>
+  <rect width="800" height="500" fill="#10182B"/>
+  <rect x="20" y="20" width="760" height="460" rx="36" fill="#10182B" stroke="#31425D"/>
+  <text x="50" y="67" fill="#B3C0D6" font-family="Arial, sans-serif" font-size="18" font-weight="700">← Back</text>
+  <rect x="574" y="42" width="105" height="40" rx="20" fill="#18233A" stroke="#31425D"/>
+  <text x="604" y="68" fill="#D6E2F4" font-family="Arial, sans-serif" font-size="16" font-weight="700">Home</text>
+  <rect x="50" y="118" width="700" height="144" rx="20" fill="#18233A" stroke="#31425D"/>
+  <text x="76" y="156" fill="#98A9C1" font-family="Arial, sans-serif" font-size="14" font-weight="700">YOUR QUESTION</text>
+  <text x="76" y="205" fill="#F2F6FF" font-family="Arial, sans-serif" font-size="26" font-weight="700">What clothes do you usually wear?</text>
+  <text x="76" y="238" fill="#B3C0D6" font-family="Arial, sans-serif" font-size="17" font-weight="700">Shuffle question   |   Pick a question</text>
+  <text x="50" y="309" fill="#98A9C1" font-family="Arial, sans-serif" font-size="14" font-weight="700">PREPARATION TIME</text>
+  <g fill="#18233A" stroke="#31425D"><rect x="50" y="325" width="164" height="48" rx="13" stroke="#818CF8" stroke-width="2"/><rect x="226" y="325" width="164" height="48" rx="13"/><rect x="402" y="325" width="164" height="48" rx="13"/><rect x="578" y="325" width="172" height="48" rx="13"/></g>
+  <g fill="#B3C0D6" font-family="Arial, sans-serif" font-size="17" font-weight="700" text-anchor="middle"><text x="132" y="356" fill="#A5A5FF">1 min</text><text x="308" y="356">2 min</text><text x="484" y="356">3 min</text><text x="664" y="356">Custom</text></g>
+  <rect x="50" y="402" width="700" height="54" rx="16" fill="url(#button)"/>
+  <text x="400" y="436" fill="#fff" font-family="Arial, sans-serif" font-size="20" font-weight="700" text-anchor="middle">Start prep timer</text>
+</svg>

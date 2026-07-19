@@ -1,0 +1,1897 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+  (function(m,e,t,r,i,k,a){
+    m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();
+    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+  })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=110858833', 'ym');
+
+  ym(110858833, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<!-- /Yandex.Metrika counter -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ментальные карты для подготовки к ОГЭ</title>
+<meta name="description" content="Interactive mind maps for EGE speaking and writing topics. Preloaded structure, editable branches, dark/light themes." />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2032%2032%22%3E%0A%20%20%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%224.2%22%20fill%3D%22none%22%20stroke%3D%22%23111111%22%20stroke-width%3D%222.2%22/%3E%0A%20%20%3Ccircle%20cx%3D%226%22%20cy%3D%227.5%22%20r%3D%222.6%22%20fill%3D%22none%22%20stroke%3D%22%23111111%22%20stroke-width%3D%222.2%22/%3E%0A%20%20%3Ccircle%20cx%3D%2226%22%20cy%3D%227.5%22%20r%3D%222.6%22%20fill%3D%22none%22%20stroke%3D%22%23111111%22%20stroke-width%3D%222.2%22/%3E%0A%20%20%3Ccircle%20cx%3D%226%22%20cy%3D%2224.5%22%20r%3D%222.6%22%20fill%3D%22none%22%20stroke%3D%22%23111111%22%20stroke-width%3D%222.2%22/%3E%0A%20%20%3Ccircle%20cx%3D%2226%22%20cy%3D%2224.5%22%20r%3D%222.6%22%20fill%3D%22none%22%20stroke%3D%22%23111111%22%20stroke-width%3D%222.2%22/%3E%0A%20%20%3Cline%20x1%3D%2212.7%22%20y1%3D%2213.6%22%20x2%3D%228.3%22%20y2%3D%229.4%22%20stroke%3D%22%23111111%22%20stroke-width%3D%221.6%22/%3E%0A%20%20%3Cline%20x1%3D%2219.3%22%20y1%3D%2213.6%22%20x2%3D%2223.7%22%20y2%3D%229.4%22%20stroke%3D%22%23111111%22%20stroke-width%3D%221.6%22/%3E%0A%20%20%3Cline%20x1%3D%2212.7%22%20y1%3D%2218.4%22%20x2%3D%228.3%22%20y2%3D%2222.6%22%20stroke%3D%22%23111111%22%20stroke-width%3D%221.6%22/%3E%0A%20%20%3Cline%20x1%3D%2219.3%22%20y1%3D%2218.4%22%20x2%3D%2223.7%22%20y2%3D%2222.6%22%20stroke%3D%22%23111111%22%20stroke-width%3D%221.6%22/%3E%0A%3C/svg%3E%0A" />
+<meta name="theme-color" content="#FAFAF7" />
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --bg: #FAFAF7;
+    --fg: #1A2E4A;
+    --border: #1A2E4A;
+    --muted: #6b7c94;
+    --card-bg: #ffffff;
+    --card-hover: #F2EFFD;
+    --ghost: #E8E4F0;
+    --butter: #F9D94E;
+    --blush: #F5AABC;
+    --lavender: #C4B5F4;
+    --sky: #93C8EE;
+    --mint: #A8D5B2;
+    --peach: #F5C9A8;
+    --topic-text: #1A2E4A;
+    --topic-meta: #526783;
+    --topic-number: #64748B;
+    --radius: 16px;
+    --shadow-card: 0 8px 32px -8px rgba(26,46,74,0.12);
+    --shadow-float: 0 20px 60px -16px rgba(26,46,74,0.20);
+  }
+  [data-theme="dark"] {
+    --bg: #0F172A;
+    --fg: #F0F0F0;
+    --border: #94A3B8;
+    --muted: #94A3B8;
+    --card-bg: #1E293B;
+    --card-hover: #334155;
+    --ghost: #334155;
+    --butter: #F9D94E;
+    --blush: #F5AABC;
+    --lavender: #C4B5F4;
+    --sky: #93C8EE;
+    --mint: #A8D5B2;
+    --peach: #F5C9A8;
+    /* Topic cards stay pastel in dark mode, so their text must stay dark. */
+    --topic-text: #1A2E4A;
+    --topic-meta: #526783;
+    --topic-number: #33455F;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0; height: 100%;
+    background: var(--bg); color: var(--fg);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  .hidden { display: none !important; }
+
+  /* Header */
+  .app-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 28px;
+    border-bottom: 1px solid var(--ghost);
+  }
+  .app-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 15px; font-weight: 800; letter-spacing: 0.22em;
+    text-transform: uppercase; margin: 0; cursor: pointer;
+    color: var(--fg);
+  }
+  .theme-btn {
+    width: 38px; height: 38px; border-radius: 50%;
+    border: 2px solid var(--ghost); background: var(--card-bg);
+    color: var(--fg); font-size: 15px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s ease;
+  }
+  .theme-btn:hover { background: var(--card-hover); border-color: var(--lavender); }
+  .header-actions { display: flex; gap: 8px; }
+
+  /* Home */
+  #home-view { padding: 40px 28px 60px; max-width: 1100px; margin: 0 auto; }
+  .home-intro { margin-bottom: 32px; }
+  .home-intro h2 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 28px; margin: 0 0 8px; font-weight: 800;
+    color: var(--fg); letter-spacing: -0.02em;
+  }
+  .home-intro p {
+    margin: 0; color: var(--muted); font-size: 14px; max-width: 520px; line-height: 1.6;
+    /* Reserve three lines so language changes do not move the topic grid. */
+    min-height: 4.8em;
+  }
+
+  .topic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+  }
+  .topic-card {
+    position: relative;
+    background: var(--card-bg);
+    color: var(--fg);
+    border: none;
+    border-radius: var(--radius);
+    text-align: left;
+    padding: 24px 20px 20px;
+    min-height: 140px;
+    cursor: pointer;
+    font-family: inherit;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    gap: 6px;
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s ease;
+  }
+  .topic-grid > :nth-child(6n+1) .topic-card { background: #FFFBEA; }
+  .topic-grid > :nth-child(6n+2) .topic-card { background: #F2EFFD; }
+  .topic-grid > :nth-child(6n+3) .topic-card { background: #EAF5FD; }
+  .topic-grid > :nth-child(6n+4) .topic-card { background: #EBF6EE; }
+  .topic-grid > :nth-child(6n+5) .topic-card { background: #FEF3EC; }
+  .topic-grid > :nth-child(6n+6) .topic-card { background: #FEF0F3; }
+  .topic-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-float);
+  }
+  .topic-card.create-map-card {
+    background: var(--card-hover);
+    border: 2px dashed var(--lavender);
+  }
+  .topic-card.create-map-card:hover { border-color: var(--sky); }
+  .topic-card.create-map-card .ghost-num { color: var(--lavender); }
+  .topic-card-wrap { position: relative; }
+  .topic-card-wrap .topic-card { width: 100%; }
+  .map-card-delete {
+    position: absolute; top: 12px; right: 12px; z-index: 2;
+    padding: 6px 9px; font-size: 10px;
+    background: var(--card-bg);
+  }
+  .ghost-num {
+    position: absolute; top: 10px; left: 14px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 40px; font-weight: 800; color: var(--topic-number);
+    line-height: 1; user-select: none;
+  }
+  .topic-name {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 15px; font-weight: 700; position: relative; z-index: 1;
+    color: var(--topic-text);
+  }
+  .topic-meta { font-size: 11px; color: var(--topic-meta); position: relative; z-index: 1; }
+
+  /* Editor */
+  #editor-view { display: flex; flex-direction: column; height: calc(100vh - 73px); }
+  .editor-toolbar {
+    display: flex; align-items: center; gap: 8px;
+    padding: 14px 20px; border-bottom: 1px solid var(--ghost);
+    flex-wrap: wrap;
+    background: var(--bg);
+  }
+  .editor-toolbar .spacer { flex: 1; }
+  #editor-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px; font-weight: 700; margin: 0 14px 0 4px;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--fg);
+  }
+  .tb-btn {
+    border: 2px solid var(--ghost); background: var(--card-bg); color: var(--fg);
+    font-family: inherit; font-size: 12px; font-weight: 600;
+    padding: 8px 14px; cursor: pointer;
+    white-space: nowrap;
+    border-radius: 999px;
+    transition: all 0.2s ease;
+  }
+  .tb-btn:hover:not(:disabled) { background: var(--card-hover); border-color: var(--lavender); }
+  .tb-btn:disabled { opacity: 0.3; cursor: default; }
+  .tb-btn.icon { padding: 8px 12px; }
+  .tb-btn.danger,
+  .map-card-delete {
+    color: #9D233E;
+    background: #FFF0F3;
+    border-color: #E9A2B4;
+  }
+  .tb-btn.danger:hover:not(:disabled),
+  .map-card-delete:hover {
+    color: #7D1830;
+    background: #FAD9E1;
+    border-color: #D76B85;
+  }
+  [data-theme="dark"] .tb-btn.danger,
+  [data-theme="dark"] .map-card-delete {
+    color: #FFD7E1;
+    background: #542337;
+    border-color: #AA526C;
+  }
+
+  #canvas-wrap {
+    flex: 1; min-height: 0; min-width: 0;
+    overflow: auto; position: relative;
+    background-image: radial-gradient(var(--ghost) 1px, transparent 1px);
+    background-size: 22px 22px;
+    scrollbar-width: none;
+  }
+  #canvas-wrap::-webkit-scrollbar { width: 0; height: 0; display: none; }
+  [data-theme="dark"] #canvas-wrap {
+    background-image: radial-gradient(rgba(148,163,184,0.15) 1px, transparent 1px);
+  }
+  #canvas-wrap.panning { cursor: grabbing; }
+  #canvas-scaler { position: relative; }
+  #canvas {
+    position: absolute; top: 0; left: 0;
+    width: 3000px; height: 2100px;
+    transform-origin: 0 0;
+  }
+  #lines { position: absolute; top: 0; left: 0; pointer-events: none; }
+  .edge { stroke: var(--muted); stroke-width: 1.5; opacity: 0.5; }
+
+  .zoom-control {
+    position: fixed; right: 20px; bottom: 20px;
+    display: flex; align-items: center; gap: 2px;
+    background: var(--card-bg); border: 2px solid var(--ghost);
+    border-radius: 999px; padding: 4px; z-index: 10;
+    box-shadow: var(--shadow-card);
+  }
+  .zoom-btn {
+    width: 34px; height: 34px; border-radius: 50%;
+    border: none; background: transparent; color: var(--fg);
+    font-size: 17px; line-height: 1; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-family: inherit;
+    transition: background 0.2s ease;
+  }
+  .zoom-btn:hover { background: var(--card-hover); }
+  .zoom-btn span { display: block; transform: translateY(-1px); }
+  #zoom-level {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 12px; font-weight: 700; color: var(--fg); min-width: 42px;
+    text-align: center; user-select: none;
+  }
+
+  .node {
+    position: absolute; transform: translate(-50%, -50%);
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--card-bg); color: var(--fg);
+    border: 2px solid var(--ghost);
+    border-radius: 12px;
+    padding: 9px 14px; font-size: 13px; cursor: grab;
+    user-select: none; white-space: nowrap; touch-action: none;
+    box-shadow: 0 2px 8px rgba(26,46,74,0.06);
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .node:active { cursor: grabbing; }
+  .node.selected { border-color: var(--blush); box-shadow: 0 0 0 3px rgba(245,170,188,0.3); }
+  .node.custom { border-style: dashed; border-color: var(--lavender); }
+  /* Pastel-background nodes always use dark navy text for readability */
+  .node.depth-0 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800; font-size: 16px; padding: 14px 22px;
+    background: #F9D94E; border-color: #1A2E4A; color: #1A2E4A;
+  }
+  .node.depth-1 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700; font-size: 14px;
+    background: #C4B5F4; border-color: transparent; color: #1A2E4A;
+  }
+  .node.depth-2 {
+    font-weight: 500;
+    background: #93C8EE; border-color: transparent; color: #1A2E4A;
+  }
+  .node.depth-3 {
+    font-weight: 400; font-style: italic; font-size: 12.5px;
+    background: #A8D5B2; border-color: transparent; color: #1A2E4A;
+  }
+  .node.depth-4 {
+    font-weight: 500; font-size: 12.5px;
+    background: #F5C9A8; border-color: transparent; color: #1A2E4A;
+  }
+  .node.depth-5 {
+    font-weight: 500; font-size: 12px;
+    background: #F5AABC; border-color: transparent; color: #1A2E4A;
+  }
+  .node.depth-6 {
+    font-weight: 500; font-size: 12px;
+    background: #BFD1F2; border-color: transparent; color: #1A2E4A;
+  }
+
+  .node-label.editing {
+    outline: none; cursor: text;
+    background: transparent;
+    border-radius: 4px; padding: 0 2px; margin: 0 -2px;
+    user-select: text; -webkit-user-select: text;
+  }
+  /* Contrast-aware text highlighters preserve the node's original text color. */
+  .node.depth-0 .node-label::selection { background: #C4B5F4; }
+  .node.depth-1 .node-label::selection { background: #F9D94E; }
+  .node.depth-2 .node-label::selection { background: #F5AABC; }
+  .node.depth-3 .node-label::selection { background: #F5C9A8; }
+  .node.depth-4 .node-label::selection { background: #93C8EE; }
+  .node.depth-5 .node-label::selection { background: #A8D5B2; }
+  .node.depth-6 .node-label::selection { background: #F9D94E; }
+  .node.depth-0 .node-label::-moz-selection { background: #C4B5F4; }
+  .node.depth-1 .node-label::-moz-selection { background: #F9D94E; }
+  .node.depth-2 .node-label::-moz-selection { background: #F5AABC; }
+  .node.depth-3 .node-label::-moz-selection { background: #F5C9A8; }
+  .node.depth-4 .node-label::-moz-selection { background: #93C8EE; }
+  .node.depth-5 .node-label::-moz-selection { background: #A8D5B2; }
+  .node.depth-6 .node-label::-moz-selection { background: #F9D94E; }
+
+  .expand-badge {
+    font-size: 10px; border: 2px solid rgba(26,46,74,0.3); border-radius: 50%;
+    width: 20px; height: 20px; display: grid; place-items: center; padding: 0;
+    cursor: pointer; background: rgba(255,255,255,0.5); flex-shrink: 0;
+    color: #1A2E4A;
+    font-variant-numeric: tabular-nums;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    transition: background 0.2s ease;
+  }
+  .expand-badge span {
+    display: grid; place-items: center; width: 100%; height: 100%;
+    line-height: 0; transform: translateY(-0.5px);
+  }
+  .expand-badge:hover { background: rgba(255,255,255,0.8); border-color: rgba(26,46,74,0.5); }
+
+  /* Hover add-child button */
+  .node-add-btn {
+    position: absolute; right: -12px; top: 50%;
+    transform: translateY(-50%);
+    width: 24px; height: 24px; border-radius: 50%;
+    background: rgba(26,46,74,0.75); color: #fff;
+    border: 2px solid rgba(255,255,255,0.9);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; font-weight: 700; cursor: pointer;
+    opacity: 0; pointer-events: none; z-index: 5;
+    transition: opacity 0.18s ease, transform 0.18s ease, background 0.18s ease;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    line-height: 0;
+  }
+  .node-add-btn span {
+    position: relative; display: block; width: 14px; height: 14px;
+  }
+  .node-add-btn span::before,
+  .node-add-btn span::after {
+    content: ''; position: absolute; left: 50%; top: 50%;
+    width: 14px; height: 3px; border-radius: 99px; background: currentColor;
+    transform: translate(-50%, -50%);
+  }
+  .node-add-btn span::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+  .node-add-btn.add-left { left: -12px; right: auto; }
+  .node-add-btn.add-right { right: -12px; left: auto; }
+  .node:hover .node-add-btn { opacity: 1; pointer-events: auto; }
+  .node-add-btn:hover {
+    background: rgba(26,46,74,0.95);
+    transform: translateY(-50%) scale(1.15);
+  }
+
+  /* Dark theme: ensure pastel node text stays high-contrast */
+  [data-theme="dark"] .node.depth-0,
+  [data-theme="dark"] .node.depth-1,
+  [data-theme="dark"] .node.depth-2,
+  [data-theme="dark"] .node.depth-3,
+  [data-theme="dark"] .node.depth-4,
+  [data-theme="dark"] .node.depth-5,
+  [data-theme="dark"] .node.depth-6 {
+    color: #0A1120;
+    text-shadow: 0 1px 3px rgba(255,255,255,0.25);
+  }
+  [data-theme="dark"] .node.depth-1 { background: #B8A8E8; }
+  [data-theme="dark"] .node.depth-2 { background: #7AB5DA; }
+  [data-theme="dark"] .node.depth-3 { background: #8FC499; }
+  [data-theme="dark"] .node.depth-4 { background: #E9B992; }
+  [data-theme="dark"] .node.depth-5 { background: #E99AB0; }
+  [data-theme="dark"] .node.depth-6 { background: #AABEE8; }
+
+  @media (max-width: 640px) {
+    .app-header { padding: 14px 16px; }
+    #home-view { padding: 24px 16px 40px; }
+    .editor-toolbar { padding: 10px 12px; }
+    .home-intro h2 { font-size: 22px; }
+  }
+
+  html.embedded .app-header { padding: 10px 16px; }
+  html.embedded .app-title { font-size: 12px; letter-spacing: 0.18em; }
+  html.embedded #home-view { padding: 22px 20px 32px; }
+  html.embedded .home-intro { margin-bottom: 20px; }
+  html.embedded .home-intro h2 { font-size: 18px; }
+  html.embedded .home-intro p { font-size: 13px; }
+  html.embedded .editor-toolbar { padding: 8px 14px; }
+
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(26,46,74,0.55);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 100;
+    backdrop-filter: blur(4px);
+  }
+  .modal-overlay.hidden { display: none; }
+  .modal-box {
+    background: var(--card-bg); color: var(--fg);
+    border: 2px solid var(--ghost);
+    border-radius: var(--radius);
+    padding: 24px; width: 320px; max-width: 90vw;
+    box-shadow: var(--shadow-float);
+  }
+  .modal-message { margin: 0 0 14px; font-size: 14px; font-weight: 500; }
+  .modal-input {
+    width: 100%; box-sizing: border-box;
+    background: var(--bg); color: var(--fg);
+    border: 2px solid var(--ghost);
+    border-radius: 10px;
+    padding: 10px 12px; font-size: 14px; font-family: inherit;
+    margin-bottom: 16px;
+    transition: border-color 0.2s ease;
+  }
+  .modal-input:focus { outline: none; border-color: var(--lavender); }
+  .modal-actions { display: flex; justify-content: flex-end; gap: 8px; }
+  .tb-btn.primary { background: var(--butter); color: #1A2E4A; border-color: #1A2E4A; }
+  .tb-btn.primary:hover { opacity: 0.85; background: var(--butter); }
+</style>
+</head>
+<body>
+<noscript><div><img src="https://mc.yandex.ru/watch/110858833" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <header class="app-header">
+    <h1 class="app-title">Ментальные карты ОГЭ</h1>
+    <div class="header-actions">
+      <button id="fullscreen-btn" class="theme-btn" title="Fullscreen">⛶</button>
+      <button id="language-toggle" class="theme-btn" title="Switch to Russian">RU</button>
+      <button id="theme-toggle" class="theme-btn" title="Toggle theme">☾</button>
+    </div>
+  </header>
+
+  <main id="home-view">
+    <div class="home-intro">
+      <h2 id="home-title">EGE speaking &amp; writing topics</h2>
+      <p id="home-description">Pick a topic to open its mind map. Each one comes preloaded with a base structure — drag nodes to rearrange, and add your own branches on top.</p>
+    </div>
+    <div id="topic-grid" class="topic-grid"></div>
+  </main>
+
+  <section id="editor-view" class="hidden">
+    <div class="editor-toolbar">
+      <button id="btn-back" class="tb-btn">← Topics</button>
+      <span id="editor-title"></span>
+      <button id="btn-add" class="tb-btn" disabled>+ Add node</button>
+      <button id="btn-rename" class="tb-btn" disabled>Rename</button>
+      <button id="btn-delete" class="tb-btn" disabled>Delete</button>
+      <div class="spacer"></div>
+      <button id="btn-expand-all" class="tb-btn">Expand all</button>
+      <button id="btn-collapse-all" class="tb-btn">Collapse all</button>
+      <button id="btn-export" class="tb-btn">Export PNG</button>
+      <button id="btn-reset" class="tb-btn">Reset map</button>
+      <button id="btn-delete-map" class="tb-btn danger hidden">Delete map</button>
+    </div>
+    <div id="canvas-wrap">
+      <div id="canvas-scaler">
+        <div id="canvas">
+          <svg id="lines" width="3000" height="2100"></svg>
+        </div>
+      </div>
+      <div class="zoom-control">
+        <button id="zoom-out" class="zoom-btn"><span>–</span></button>
+        <span id="zoom-level">100%</span>
+        <button id="zoom-in" class="zoom-btn"><span>+</span></button>
+      </div>
+    </div>
+  </section>
+
+  <div id="modal-overlay" class="modal-overlay hidden">
+    <div class="modal-box">
+      <p id="modal-message" class="modal-message"></p>
+      <input id="modal-input" class="modal-input" type="text" />
+      <div class="modal-actions">
+        <button id="modal-cancel" class="tb-btn">Cancel</button>
+        <button id="modal-confirm" class="tb-btn primary">OK</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+/* ===== Embedded-mode detection ===== */
+(function detectEmbedded() {
+  let embedded = false;
+  try {
+    embedded = window.self !== window.top;
+  } catch (e) {
+    embedded = true;
+  }
+  if (embedded) document.documentElement.classList.add('embedded');
+})();
+
+/* ===== Examind — mind map data + engine ===== */
+
+let _id = 0;
+function n(text, children) {
+  return { id: 'n' + (_id++), text: text, children: children || [], locked: true };
+}
+
+const TOPICS = [
+  { key: 'sports', title: 'Sport', tree: n('Sport', [
+    n('Types of sport', [
+      n('Team sports', [n('football'), n('basketball'), n('volleyball')]),
+      n('Individual sports', [n('tennis'), n('swimming'), n('athletics')]),
+      n('Extreme sports', [n('skateboarding'), n('snowboarding'), n('rock climbing')]),
+    ]),
+    n('Benefits', [
+      n('Physical health', [n('builds strength'), n('improves stamina'), n('boosts heart health')]),
+      n('Mental health', [n('reduces stress'), n('increases confidence'), n('sharpens focus')]),
+      n('Social skills', [n('teamwork'), n('discipline'), n('making friends')]),
+    ]),
+    n('Equipment & places', [
+      n('Clothing & gear', [n('trainers'), n('tracksuit'), n('helmet')]),
+      n('Venues', [n('stadium'), n('gym'), n('sports court')]),
+    ]),
+    n('Problems', [
+      n('Injuries', [n('sprains'), n('overtraining'), n('concussions')]),
+      n('Cost', [n('expensive equipment'), n('gym membership'), n('coaching fees')]),
+      n('Doping', [n('unfair advantage'), n('health risks'), n('banned substances')]),
+    ]),
+  ])},
+
+  { key: 'professions', title: 'Professions', tree: n('Professions', [
+    n('Choosing a career', [
+      n('Factors', [n('salary'), n('personal interest'), n('job security')]),
+      n('Influences', [n('family tradition'), n('role models'), n('school subjects')]),
+    ]),
+    n('Types of jobs', [
+      n('Creative', [n('designer'), n('musician'), n('writer')]),
+      n('Technical', [n('engineer'), n('programmer'), n('mechanic')]),
+      n('Service', [n('teacher'), n('doctor'), n('waiter')]),
+    ]),
+    n('Skills needed', [
+      n('Soft skills', [n('communication'), n('teamwork'), n('time management')]),
+      n('Hard skills', [n('technical training'), n('qualifications'), n('certification')]),
+    ]),
+    n('Modern trends', [
+      n('Remote work', [n('flexible hours'), n('home office'), n('freelancing')]),
+      n('Automation', [n('robots replacing jobs'), n('new tech roles'), n('reskilling')]),
+    ]),
+  ])},
+
+  { key: 'freetime', title: 'Free time & hobbies', tree: n('Free time', [
+    n('Indoor activities', [
+      n('Creative', [n('painting'), n('reading'), n('playing an instrument')]),
+      n('Digital', [n('video games'), n('streaming shows'), n('social media')]),
+    ]),
+    n('Outdoor activities', [
+      n('Active', [n('cycling'), n('hiking'), n('jogging')]),
+      n('Social', [n('picnics'), n('sports with friends'), n('volunteering')]),
+    ]),
+    n('Benefits', [
+      n('Relaxation', [n('stress relief'), n('escape from routine')]),
+      n('Growth', [n('new skills'), n('creativity'), n('self-expression')]),
+    ]),
+    n('Challenges', [
+      n('Time management', [n('balancing school and hobbies')]),
+      n('Cost', [n('equipment'), n('lessons'), n('memberships')]),
+    ]),
+  ])},
+
+  { key: 'travel', title: 'Travel', tree: n('Travel', [
+    n('Types of travel', [
+      n('Leisure', [n('beach holiday'), n('sightseeing'), n('city break')]),
+      n('Educational', [n('school exchange'), n('excursion'), n('study trip')]),
+    ]),
+    n('Planning a trip', [
+      n('Logistics', [n('booking tickets'), n('packing'), n('visas')]),
+      n('Budget', [n('accommodation'), n('transport'), n('souvenirs')]),
+    ]),
+    n('Benefits', [
+      n('Cultural', [n('learning traditions'), n('trying new food'), n('meeting people')]),
+      n('Personal', [n('broadens horizons'), n('builds independence'), n('memorable experiences')]),
+    ]),
+    n('Problems', [
+      n('Practical', [n('lost luggage'), n('delays'), n('language barrier')]),
+      n('Environmental', [n('overtourism'), n('pollution'), n('carbon footprint')]),
+    ]),
+  ])},
+
+  { key: 'education', title: 'Education', tree: n('Education', [
+    n('School subjects', [
+      n('Sciences', [n('biology'), n('physics'), n('chemistry')]),
+      n('Humanities', [n('literature'), n('history'), n('foreign languages')]),
+    ]),
+    n('Learning methods', [
+      n('Traditional', [n('lectures'), n('textbooks'), n('exams')]),
+      n('Modern', [n('online courses'), n('apps'), n('interactive lessons')]),
+    ]),
+    n('Exams & assessment', [
+      n('Preparation', [n('revision'), n('practice tests'), n('tutoring')]),
+      n('Stress', [n('pressure'), n('anxiety'), n('time management')]),
+    ]),
+    n('Future plans', [
+      n('Higher education', [n('university'), n('college'), n('scholarships')]),
+      n('Alternatives', [n('vocational training'), n('gap year'), n('apprenticeship')]),
+    ]),
+  ])},
+
+  { key: 'technology', title: 'Technology', tree: n('Technology', [
+    n('Devices', [
+      n('Everyday', [n('smartphones'), n('laptops'), n('tablets')]),
+      n('Emerging', [n('smart watches'), n('VR headsets'), n('AI assistants')]),
+    ]),
+    n('Uses', [
+      n('Communication', [n('messaging'), n('video calls'), n('social media')]),
+      n('Learning & work', [n('online research'), n('remote work'), n('coding')]),
+    ]),
+    n('Benefits', [
+      n('Convenience', [n('instant information'), n('automation'), n('connectivity')]),
+      n('Innovation', [n('new opportunities'), n('efficiency'), n('creativity')]),
+    ]),
+    n('Drawbacks', [
+      n('Health', [n('screen time'), n('eye strain'), n('poor sleep')]),
+      n('Social', [n('addiction'), n('privacy concerns'), n('cyberbullying')]),
+    ]),
+  ])},
+
+  { key: 'health', title: 'Health', tree: n('Health', [
+    n('Physical health', [
+      n('Diet', [n('balanced meals'), n('vitamins'), n('hydration')]),
+      n('Exercise', [n('regular activity'), n('sports'), n('stretching')]),
+    ]),
+    n('Mental health', [
+      n('Self-care', [n('sleep'), n('relaxation'), n('hobbies')]),
+      n('Support', [n('talking to friends'), n('counselling'), n('mindfulness')]),
+    ]),
+    n('Healthcare system', [
+      n('Access', [n('doctors'), n('hospitals'), n('insurance')]),
+      n('Prevention', [n('vaccination'), n('check-ups'), n('screening')]),
+    ]),
+    n('Modern issues', [
+      n('Lifestyle diseases', [n('obesity'), n('stress-related illness'), n('lack of exercise')]),
+      n("Technology's role", [n('fitness apps'), n('telemedicine'), n('health tracking')]),
+    ]),
+  ])},
+
+  { key: 'environment', title: 'Environment', tree: n('Environment', [
+    n('Problems', [
+      n('Pollution', [n('air'), n('water'), n('plastic waste')]),
+      n('Climate change', [n('global warming'), n('extreme weather'), n('rising sea levels')]),
+    ]),
+    n('Causes', [
+      n('Human activity', [n('industry'), n('transport'), n('deforestation')]),
+      n('Consumption', [n('overuse of resources'), n('fast fashion'), n('food waste')]),
+    ]),
+    n('Solutions', [
+      n('Individual', [n('recycling'), n('saving energy'), n('reducing waste')]),
+      n('Global', [n('renewable energy'), n('international agreements'), n('green technology')]),
+    ]),
+    n('Getting involved', [
+      n('Actions', [n('volunteering'), n('eco clubs'), n('raising awareness')]),
+      n('Choices', [n('sustainable products'), n('public transport'), n('eating less meat')]),
+    ]),
+  ])},
+];
+
+/* ===== App state ===== */
+
+const UI = {
+  en: {
+    documentTitle: 'Mental maps for OGE preparation',
+    homeTitle: 'EGE speaking & writing topics',
+    homeDescription: 'Pick a topic to open its mind map. Each one comes preloaded with a base structure — drag nodes to rearrange, and add your own branches on top.',
+    fullscreen: 'Fullscreen', exitFullscreen: 'Exit fullscreen', switchToRussian: 'Switch to Russian', switchToEnglish: 'Switch to English',
+    toggleTheme: 'Toggle theme', topics: 'Topics', addNode: 'Add node', rename: 'Rename', delete: 'Delete',
+    expandAll: 'Expand all', collapseAll: 'Collapse all', exportPng: 'Export PNG', resetMap: 'Reset map',
+    cancel: 'Cancel', confirm: 'OK', preloadedNodes: 'preloaded nodes', yours: 'of yours', collapse: 'Collapse',
+    showHidden: count => `Show ${count} hidden`, addChild: 'Add child node', addLeft: 'Add left branch', addRight: 'Add right branch',
+    newNodeText: 'New node text:', renameNode: 'Rename node:', deleteNode: 'Delete this node and everything under it?',
+    createCustomMap: 'Create your own map', customMapDescription: 'Start with a blank canvas — saved on this device',
+    newCustomMapName: 'Name your new mind map:', savedLocally: 'Saved on this device',
+    resetConfirm: 'Reset this map to the original preloaded version? Your added nodes and moved positions will be lost.',
+    deleteMap: 'Delete map', deleteMapConfirm: title => `Delete “${title}”? This cannot be undone.`,
+  },
+  ru: {
+    documentTitle: 'Ментальные карты для подготовки к ОГЭ',
+    homeTitle: 'Темы для устной и письменной части ЕГЭ',
+    homeDescription: 'Выберите тему, чтобы открыть её интеллект-карту. Каждая тема уже содержит базовую структуру: перетаскивайте узлы и добавляйте свои ветви.',
+    fullscreen: 'На весь экран', exitFullscreen: 'Выйти из полноэкранного режима', switchToRussian: 'Переключить на русский', switchToEnglish: 'Переключить на английский',
+    toggleTheme: 'Сменить тему', topics: 'Темы', addNode: 'Добавить узел', rename: 'Переименовать', delete: 'Удалить',
+    expandAll: 'Развернуть всё', collapseAll: 'Свернуть всё', exportPng: 'Экспорт PNG', resetMap: 'Сбросить карту',
+    cancel: 'Отмена', confirm: 'ОК', preloadedNodes: 'готовых узлов', yours: 'ваших', collapse: 'Свернуть',
+    showHidden: count => `Показать скрытые: ${count}`, addChild: 'Добавить дочерний узел', addLeft: 'Добавить ветвь слева', addRight: 'Добавить ветвь справа',
+    newNodeText: 'Текст нового узла:', renameNode: 'Переименовать узел:', deleteNode: 'Удалить этот узел и все дочерние узлы?',
+    createCustomMap: 'Создать свою карту', customMapDescription: 'Начните с чистого листа — карта сохранится на этом устройстве',
+    newCustomMapName: 'Название новой интеллект-карты:', savedLocally: 'Сохранено на этом устройстве',
+    resetConfirm: 'Сбросить карту к исходному виду? Добавленные узлы и изменённые позиции будут удалены.',
+    deleteMap: 'Удалить карту', deleteMapConfirm: title => `Удалить «${title}»? Это действие нельзя отменить.`,
+  },
+};
+
+let language = localStorage.getItem('examind_language') === 'ru' ? 'ru' : 'en';
+function tr(key, ...args) {
+  const value = UI[language][key];
+  return typeof value === 'function' ? value(...args) : value;
+}
+
+let currentTopic = null;
+let selectedId = null;
+let dragInfo = null;
+const idMap = {};
+function indexNode(node) {
+  idMap[node.id] = node;
+  (node.children || []).forEach(indexNode);
+}
+TOPICS.forEach(t => indexNode(t.tree));
+
+const CUSTOM_MAPS_STORAGE_KEY = 'examind_custom_maps';
+
+function loadCustomMaps() {
+  try {
+    const raw = localStorage.getItem(CUSTOM_MAPS_STORAGE_KEY);
+    const parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed)
+      ? parsed.filter(map => map && typeof map.key === 'string' && typeof map.title === 'string' && typeof map.rootId === 'string')
+      : [];
+  } catch (e) {
+    return [];
+  }
+}
+
+function saveCustomMaps(maps) {
+  localStorage.setItem(CUSTOM_MAPS_STORAGE_KEY, JSON.stringify(maps));
+}
+
+function getAllTopics() {
+  return TOPICS.concat(loadCustomMaps().map(map => ({
+    key: map.key,
+    title: map.title,
+    isCustomMap: true,
+    tree: { id: map.rootId, text: map.title, children: [], locked: true },
+  })));
+}
+
+function storageKey(topicKey) { return 'examind_state_' + topicKey; }
+
+function loadState(topicKey) {
+  try {
+    const raw = localStorage.getItem(storageKey(topicKey));
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      parsed.customChildren = parsed.customChildren || {};
+      parsed.positions = parsed.positions || {};
+      parsed.sides = parsed.sides || {};
+      parsed.expanded = parsed.expanded || {};
+      parsed.renamed = parsed.renamed || {};
+      parsed.deleted = parsed.deleted || {};
+      return parsed;
+    }
+  } catch (e) {}
+  return { customChildren: {}, positions: {}, sides: {}, expanded: {}, renamed: {}, deleted: {} };
+}
+
+function saveState(topicKey, state) {
+  localStorage.setItem(storageKey(topicKey), JSON.stringify(state));
+}
+
+let state = null;
+
+function getChildren(node) {
+  const preloaded = (node.children || []).filter(c => !state.deleted[c.id]);
+  const custom = (state.customChildren[node.id] || []).map(c => ({
+    id: c.id, text: c.text, children: [], locked: false,
+  }));
+  return preloaded.concat(custom);
+}
+
+function displayText(node) {
+  if (node.locked && state.renamed[node.id]) return state.renamed[node.id];
+  return node.text;
+}
+
+function isExpanded(node, depth) {
+  if (Object.prototype.hasOwnProperty.call(state.expanded, node.id)) {
+    return state.expanded[node.id];
+  }
+  return depth <= 1;
+}
+
+function customNodeCount(topicKey) {
+  const s = loadState(topicKey);
+  let count = 0;
+  Object.keys(s.customChildren).forEach(k => (count += s.customChildren[k].length));
+  return count;
+}
+
+function countPreloaded(node) {
+  let c = 1;
+  (node.children || []).forEach(ch => (c += countPreloaded(ch)));
+  return c;
+}
+
+/* ===== Layout (balanced left / right mind map) ===== */
+
+const INITIAL_CANVAS_W = 3000, INITIAL_CANVAS_H = 2100;
+let canvasWidth = INITIAL_CANVAS_W, canvasHeight = INITIAL_CANVAS_H;
+let CENTER_X = INITIAL_CANVAS_W / 2, CENTER_Y = INITIAL_CANVAS_H / 2;
+const ROOT_OFFSET = 340;
+const HORIZONTAL_STEP = 300;
+const MAX_VERTICAL_SPAN = 1760;
+const LEAF_SPACING = 64;
+const posCache = {};
+
+function visibleWeight(node, depth) {
+  if (!isExpanded(node, depth)) return 1;
+  const children = getChildren(node);
+  if (!children.length) return 1;
+  return children.reduce((sum, c) => sum + visibleWeight(c, depth + 1), 0);
+}
+
+function layoutTree(root) {
+  Object.keys(posCache).forEach(id => delete posCache[id]);
+  posCache[root.id] = { x: CENTER_X, y: CENTER_Y, side: 'root' };
+
+  // Mind-map branches are attached to either side of the main node. Once a
+  // root branch has a side, every descendant stays on that side.
+  const branches = getChildren(root);
+  const groups = { left: [], right: [] };
+  branches.forEach((branch, index) => {
+    const side = state.sides[branch.id] || (index % 2 === 0 ? 'right' : 'left');
+    groups[side].push(branch);
+  });
+
+  ['left', 'right'].forEach(side => layoutSide(groups[side], side));
+
+  function layoutSide(branchesOnSide, side) {
+    if (!branchesOnSide.length) return;
+    const weights = branchesOnSide.map(branch => Math.max(visibleWeight(branch, 1), 1));
+    const totalWeight = weights.reduce((sum, weight) => sum + weight, 0);
+    const span = Math.min(MAX_VERTICAL_SPAN, Math.max(360, totalWeight * LEAF_SPACING));
+    let cursor = CENTER_Y - span / 2;
+
+    branchesOnSide.forEach((branch, index) => {
+      const portion = span * (weights[index] / totalWeight);
+      layoutBranch(branch, 1, side, cursor, cursor + portion);
+      cursor += portion;
+    });
+  }
+
+  function layoutBranch(node, depth, side, top, bottom) {
+    const direction = side === 'right' ? 1 : -1;
+    const override = state.positions[node.id];
+    const defaultX = CENTER_X + direction * (ROOT_OFFSET + (depth - 1) * HORIZONTAL_STEP);
+    const defaultY = (top + bottom) / 2;
+    posCache[node.id] = {
+      x: override ? override.x : defaultX,
+      y: override ? override.y : defaultY,
+      side,
+    };
+
+    if (!isExpanded(node, depth)) return;
+    const children = getChildren(node);
+    if (!children.length) return;
+    const weights = children.map(child => Math.max(visibleWeight(child, depth + 1), 1));
+    const totalWeight = weights.reduce((sum, weight) => sum + weight, 0);
+    let cursor = top;
+
+    children.forEach((child, index) => {
+      const portion = (bottom - top) * (weights[index] / totalWeight);
+      layoutBranch(child, depth + 1, side, cursor, cursor + portion);
+      cursor += portion;
+    });
+  }
+}
+
+function chooseRootSide() {
+  const rootChildren = getChildren(currentTopic.tree);
+  const total = { left: 0, right: 0 };
+  rootChildren.forEach((child, index) => {
+    const side = state.sides[child.id] || (index % 2 === 0 ? 'right' : 'left');
+    total[side] += Math.max(visibleWeight(child, 1), 1);
+  });
+  return total.left <= total.right ? 'left' : 'right';
+}
+
+function isRootChild(id) {
+  return getChildren(currentTopic.tree).some(child => child.id === id);
+}
+
+function restoreCanvas() {
+  const saved = state.canvas || {};
+  canvasWidth = saved.width || INITIAL_CANVAS_W;
+  canvasHeight = saved.height || INITIAL_CANVAS_H;
+  CENTER_X = saved.centerX || INITIAL_CANVAS_W / 2;
+  CENTER_Y = saved.centerY || INITIAL_CANVAS_H / 2;
+}
+
+function persistCanvas() {
+  state.canvas = { width: canvasWidth, height: canvasHeight, centerX: CENTER_X, centerY: CENTER_Y };
+}
+
+function ensureCanvasSpace() {
+  const positions = Object.values(posCache);
+  if (!positions.length) return false;
+
+  const SAFE_MARGIN = 420;
+  const GROWTH_BUFFER = 520;
+  const xs = positions.map(pos => pos.x);
+  const ys = positions.map(pos => pos.y);
+  const minX = Math.min(...xs), maxX = Math.max(...xs);
+  const minY = Math.min(...ys), maxY = Math.max(...ys);
+  const growLeft = minX < SAFE_MARGIN ? Math.ceil(SAFE_MARGIN - minX + GROWTH_BUFFER) : 0;
+  const growRight = maxX > canvasWidth - SAFE_MARGIN ? Math.ceil(maxX - (canvasWidth - SAFE_MARGIN) + GROWTH_BUFFER) : 0;
+  const growTop = minY < SAFE_MARGIN ? Math.ceil(SAFE_MARGIN - minY + GROWTH_BUFFER) : 0;
+  const growBottom = maxY > canvasHeight - SAFE_MARGIN ? Math.ceil(maxY - (canvasHeight - SAFE_MARGIN) + GROWTH_BUFFER) : 0;
+
+  if (!growLeft && !growRight && !growTop && !growBottom) return false;
+
+  if (growLeft || growTop) {
+    Object.values(state.positions).forEach(pos => {
+      if (growLeft) pos.x += growLeft;
+      if (growTop) pos.y += growTop;
+    });
+    CENTER_X += growLeft;
+    CENTER_Y += growTop;
+  }
+  canvasWidth += growLeft + growRight;
+  canvasHeight += growTop + growBottom;
+  persistCanvas();
+  saveState(currentTopic.key, state);
+  applyZoom();
+
+  // Expanding above or to the left shifts map coordinates. Offset the scroll
+  // position by the same amount so the user continues looking at the same spot.
+  if (growLeft || growTop) {
+    requestAnimationFrame(() => {
+      canvasWrap.scrollLeft += growLeft * zoom;
+      canvasWrap.scrollTop += growTop * zoom;
+    });
+  }
+  return true;
+}
+
+/* ===== Visibility traversal ===== */
+
+function collectVisible(root) {
+  const list = [];
+  function walk(node, depth, parentId) {
+    node._depth = depth;
+    list.push({ node, parentId });
+    if (isExpanded(node, depth)) {
+      getChildren(node).forEach(child => walk(child, depth + 1, node.id));
+    }
+  }
+  walk(root, 0, null);
+  return list;
+}
+
+/* ===== DOM refs ===== */
+
+const homeView = document.getElementById('home-view');
+const editorView = document.getElementById('editor-view');
+const topicGrid = document.getElementById('topic-grid');
+const canvasWrap = document.getElementById('canvas-wrap');
+const canvasScaler = document.getElementById('canvas-scaler');
+const canvasEl = document.getElementById('canvas');
+const svgEl = document.getElementById('lines');
+const zoomOutBtn = document.getElementById('zoom-out');
+const zoomInBtn = document.getElementById('zoom-in');
+const zoomLevelEl = document.getElementById('zoom-level');
+const editorTitle = document.getElementById('editor-title');
+const btnAdd = document.getElementById('btn-add');
+const btnRename = document.getElementById('btn-rename');
+const btnDelete = document.getElementById('btn-delete');
+const btnReset = document.getElementById('btn-reset');
+const btnDeleteMap = document.getElementById('btn-delete-map');
+const btnExpandAll = document.getElementById('btn-expand-all');
+const btnCollapseAll = document.getElementById('btn-collapse-all');
+const btnExport = document.getElementById('btn-export');
+const btnBack = document.getElementById('btn-back');
+const themeToggle = document.getElementById('theme-toggle');
+const languageToggle = document.getElementById('language-toggle');
+const modalOverlay = document.getElementById('modal-overlay');
+const modalMessage = document.getElementById('modal-message');
+const modalInput = document.getElementById('modal-input');
+const modalCancel = document.getElementById('modal-cancel');
+const modalConfirm = document.getElementById('modal-confirm');
+const homeTitle = document.getElementById('home-title');
+const homeDescription = document.getElementById('home-description');
+
+/* Let the containing website grow the frame to the active screen. This keeps
+   the topic list in the normal page scroll instead of clipping it inside a
+   second, tiny scroll area. */
+function reportFrameHeight() {
+  let isEmbedded = false;
+  try {
+    isEmbedded = window.self !== window.top;
+  } catch (e) {
+    isEmbedded = true;
+  }
+  if (!isEmbedded || !window.parent) return;
+  const header = document.querySelector('.app-header');
+  const contentHeight = currentTopic
+    ? Math.max(720, window.innerHeight)
+    : (header ? header.offsetHeight : 0) + homeView.scrollHeight;
+  window.parent.postMessage({
+    type: 'examind:frame-height',
+    height: Math.ceil(contentHeight),
+  }, window.location.origin);
+}
+
+function scheduleFrameHeightReport() {
+  requestAnimationFrame(() => requestAnimationFrame(reportFrameHeight));
+}
+
+window.addEventListener('message', event => {
+  if (event.origin !== window.location.origin) return;
+  if (event.data?.type === 'examind:request-frame-height') reportFrameHeight();
+});
+
+window.addEventListener('resize', scheduleFrameHeightReport);
+
+function applyLanguage() {
+  document.documentElement.lang = language;
+  document.title = tr('documentTitle');
+  homeTitle.textContent = tr('homeTitle');
+  homeDescription.textContent = tr('homeDescription');
+  btnBack.textContent = '← ' + tr('topics');
+  btnAdd.textContent = '+ ' + tr('addNode');
+  btnRename.textContent = tr('rename');
+  btnDelete.textContent = tr('delete');
+  btnExpandAll.textContent = tr('expandAll');
+  btnCollapseAll.textContent = tr('collapseAll');
+  btnExport.textContent = tr('exportPng');
+  btnReset.textContent = tr('resetMap');
+  btnDeleteMap.textContent = tr('deleteMap');
+  modalCancel.textContent = tr('cancel');
+  modalConfirm.textContent = tr('confirm');
+  languageToggle.textContent = language === 'en' ? 'RU' : 'EN';
+  languageToggle.title = language === 'en' ? tr('switchToRussian') : tr('switchToEnglish');
+  themeToggle.title = tr('toggleTheme');
+  fullscreenBtn.title = document.fullscreenElement ? tr('exitFullscreen') : tr('fullscreen');
+
+  if (currentTopic) renderCanvas();
+  else renderHome();
+  scheduleFrameHeightReport();
+}
+
+/* ===== Modal ===== */
+
+let modalResolve = null;
+let modalIsPrompt = false;
+
+function showPrompt(message, defaultValue) {
+  modalIsPrompt = true;
+  modalMessage.textContent = message;
+  modalInput.style.display = 'block';
+  modalInput.value = defaultValue || '';
+  modalOverlay.classList.remove('hidden');
+  setTimeout(() => { modalInput.focus(); modalInput.select(); }, 0);
+  return new Promise(resolve => (modalResolve = resolve));
+}
+
+function showConfirm(message) {
+  modalIsPrompt = false;
+  modalMessage.textContent = message;
+  modalInput.style.display = 'none';
+  modalOverlay.classList.remove('hidden');
+  return new Promise(resolve => (modalResolve = resolve));
+}
+
+function closeModal(result) {
+  modalOverlay.classList.add('hidden');
+  if (modalResolve) modalResolve(result);
+  modalResolve = null;
+}
+
+modalConfirm.addEventListener('click', () => {
+  closeModal(modalIsPrompt ? modalInput.value : true);
+});
+modalCancel.addEventListener('click', () => {
+  closeModal(modalIsPrompt ? null : false);
+});
+modalInput.addEventListener('keydown', ev => {
+  if (ev.key === 'Enter') modalConfirm.click();
+  if (ev.key === 'Escape') modalCancel.click();
+});
+modalOverlay.addEventListener('click', ev => {
+  if (ev.target === modalOverlay) modalCancel.click();
+});
+
+/* ===== Home rendering ===== */
+
+function renderHome() {
+  topicGrid.innerHTML = '';
+  getAllTopics().forEach((t, i) => {
+    const cardWrap = document.createElement('div');
+    cardWrap.className = 'topic-card-wrap';
+    const card = document.createElement('button');
+    card.className = 'topic-card';
+    const added = customNodeCount(t.key);
+    const meta = t.isCustomMap
+      ? tr('savedLocally') + (added ? ' · ' + added + ' ' + tr('yours') : '')
+      : countPreloaded(t.tree) + ' ' + tr('preloadedNodes') + (added ? ' · ' + added + ' ' + tr('yours') : '');
+    card.innerHTML =
+      '<span class="ghost-num">' + String(i + 1).padStart(2, '0') + '</span>' +
+      '<span class="topic-name">' + t.title + '</span>' +
+      '<span class="topic-meta">' + meta + '</span>';
+    card.addEventListener('click', () => openTopic(t.key));
+    cardWrap.appendChild(card);
+    if (t.isCustomMap) {
+      const deleteButton = document.createElement('button');
+      deleteButton.className = 'tb-btn map-card-delete';
+      deleteButton.textContent = tr('deleteMap');
+      deleteButton.addEventListener('click', async () => {
+        await deleteCustomMap(t.key);
+      });
+      cardWrap.appendChild(deleteButton);
+    }
+    topicGrid.appendChild(cardWrap);
+  });
+
+  const createCardWrap = document.createElement('div');
+  createCardWrap.className = 'topic-card-wrap';
+  const createCard = document.createElement('button');
+  createCard.className = 'topic-card create-map-card';
+  createCard.innerHTML =
+    '<span class="ghost-num">+</span>' +
+    '<span class="topic-name">' + tr('createCustomMap') + '</span>' +
+    '<span class="topic-meta">' + tr('customMapDescription') + '</span>';
+  createCard.addEventListener('click', createCustomMap);
+  createCardWrap.appendChild(createCard);
+  topicGrid.appendChild(createCardWrap);
+  scheduleFrameHeightReport();
+}
+
+/* ===== Editor rendering ===== */
+
+function openTopic(key) {
+  currentTopic = getAllTopics().find(t => t.key === key);
+  if (!currentTopic) return;
+  indexNode(currentTopic.tree);
+  state = loadState(key);
+  restoreCanvas();
+  selectedId = null;
+  editorTitle.textContent = currentTopic.title;
+  homeView.classList.add('hidden');
+  editorView.classList.remove('hidden');
+  zoom = 1;
+  applyZoom();
+  renderCanvas();
+  updateToolbar();
+  scheduleFrameHeightReport();
+  requestAnimationFrame(() => {
+    canvasWrap.scrollLeft = CENTER_X * zoom - canvasWrap.clientWidth / 2;
+    canvasWrap.scrollTop = CENTER_Y * zoom - canvasWrap.clientHeight / 2;
+  });
+}
+
+async function createCustomMap() {
+  const title = await showPrompt(tr('newCustomMapName'), tr('createCustomMap'));
+  if (!title || !title.trim()) return;
+  const stamp = Date.now().toString(36);
+  const key = 'custom-' + stamp;
+  const maps = loadCustomMaps();
+  maps.push({ key, title: title.trim(), rootId: key + '-root' });
+  saveCustomMaps(maps);
+  openTopic(key);
+}
+
+async function deleteCustomMap(key) {
+  const map = loadCustomMaps().find(item => item.key === key);
+  if (!map) return;
+  const ok = await showConfirm(tr('deleteMapConfirm', map.title));
+  if (!ok) return;
+  saveCustomMaps(loadCustomMaps().filter(item => item.key !== key));
+  localStorage.removeItem(storageKey(key));
+  if (currentTopic && currentTopic.key === key) {
+    goHome();
+  } else {
+    renderHome();
+  }
+}
+
+function goHome() {
+  editorView.classList.add('hidden');
+  homeView.classList.remove('hidden');
+  currentTopic = null;
+  renderHome();
+}
+
+const sizeCache = {};
+
+function rectExitDistance(halfW, halfH, dx, dy) {
+  if (dx === 0 && dy === 0) return 0;
+  const tx = dx !== 0 ? halfW / Math.abs(dx) : Infinity;
+  const ty = dy !== 0 ? halfH / Math.abs(dy) : Infinity;
+  return Math.min(tx, ty);
+}
+
+function edgePoints(parent, node) {
+  const p = posCache[parent.id];
+  const c = posCache[node.id];
+  const direction = c.x >= p.x ? 1 : -1;
+  const pSize = sizeCache[parent.id] || { halfW: 0, halfH: 0 };
+  const cSize = sizeCache[node.id] || { halfW: 0, halfH: 0 };
+  return {
+    x1: p.x + direction * pSize.halfW,
+    y1: p.y,
+    x2: c.x - direction * cSize.halfW,
+    y2: c.y,
+  };
+}
+
+function drawAllEdges(visible, posMap) {
+  svgEl.innerHTML = '';
+  visible.forEach(({ node, parentId }) => {
+    if (!parentId) return;
+    const parent = posMap[parentId];
+    const pts = edgePoints(parent, node);
+    const direction = pts.x2 >= pts.x1 ? 1 : -1;
+    const bend = Math.max(52, Math.min(180, Math.abs(pts.x2 - pts.x1) * 0.48));
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('d', `M ${pts.x1} ${pts.y1} C ${pts.x1 + direction * bend} ${pts.y1}, ${pts.x2 - direction * bend} ${pts.y2}, ${pts.x2} ${pts.y2}`);
+    path.setAttribute('class', 'edge');
+    path.setAttribute('fill', 'none');
+    svgEl.appendChild(path);
+  });
+}
+
+function renderCanvas() {
+  layoutTree(currentTopic.tree);
+  if (ensureCanvasSpace()) layoutTree(currentTopic.tree);
+  const visible = collectVisible(currentTopic.tree);
+  const posMap = {};
+  visible.forEach(v => (posMap[v.node.id] = v.node));
+
+  canvasEl.querySelectorAll('.node').forEach(el => el.remove());
+  svgEl.innerHTML = '';
+
+  const elMap = {};
+
+  visible.forEach(({ node }) => {
+    const el = document.createElement('div');
+    const children = getChildren(node);
+    const pos = posCache[node.id] || { x: CENTER_X, y: CENTER_Y, side: 'root' };
+    el.className = 'node depth-' + Math.min(node._depth, 6) + (node.locked ? '' : ' custom') +
+      (node.id === selectedId ? ' selected' : '') + (pos.side === 'left' ? ' side-left' : pos.side === 'right' ? ' side-right' : '');
+    el.style.left = pos.x + 'px';
+    el.style.top = pos.y + 'px';
+    el.dataset.id = node.id;
+
+    const label = document.createElement('span');
+    label.className = 'node-label';
+    label.textContent = displayText(node);
+    label.addEventListener('pointerdown', ev => {
+      if (label.isContentEditable) ev.stopPropagation();
+    });
+    el.appendChild(label);
+
+    if (children.length) {
+      const badge = document.createElement('span');
+      badge.className = 'expand-badge';
+      const expanded = isExpanded(node, node._depth);
+      badge.title = expanded ? tr('collapse') : tr('showHidden', children.length);
+      const glyph = document.createElement('span');
+      glyph.textContent = expanded ? '\u2212' : String(children.length);
+      badge.appendChild(glyph);
+      badge.addEventListener('pointerdown', ev => ev.stopPropagation());
+      badge.addEventListener('dblclick', ev => ev.stopPropagation());
+      badge.addEventListener('click', ev => {
+        ev.stopPropagation();
+        state.expanded[node.id] = !isExpanded(node, node._depth);
+        saveState(currentTopic.key, state);
+        renderCanvas();
+      });
+      el.appendChild(badge);
+    }
+
+    /* The main node offers a branch on each side. Other nodes continue
+       their existing branch away from the centre. */
+    function addNodeButton(side, title) {
+      const addBtn = document.createElement('span');
+      addBtn.className = 'node-add-btn add-' + side;
+      const addGlyph = document.createElement('span');
+      addGlyph.setAttribute('aria-hidden', 'true');
+      addBtn.appendChild(addGlyph);
+      addBtn.title = title;
+      addBtn.addEventListener('pointerdown', ev => ev.stopPropagation());
+      addBtn.addEventListener('click', ev => {
+        ev.stopPropagation();
+        createBlankChildAndEdit(node.id, node.id === currentTopic.tree.id ? side : null);
+      });
+      el.appendChild(addBtn);
+    }
+    if (node.id === currentTopic.tree.id) {
+      addNodeButton('left', tr('addLeft'));
+      addNodeButton('right', tr('addRight'));
+    } else {
+      addNodeButton(pos.side === 'left' ? 'left' : 'right', tr('addChild'));
+    }
+
+    el.addEventListener('click', ev => {
+      if (dragInfo && dragInfo.moved) return;
+      ev.stopPropagation();
+      if (selectedId === node.id) return;
+      selectedId = node.id;
+      renderCanvas();
+      updateToolbar();
+    });
+
+    el.addEventListener('dblclick', ev => {
+      ev.stopPropagation();
+      if (node.id === currentTopic.tree.id) return;
+      beginInlineEdit(node, label);
+    });
+
+    el.addEventListener('pointerdown', ev => onPointerDown(ev, node));
+
+    canvasEl.appendChild(el);
+    elMap[node.id] = el;
+  });
+
+  visible.forEach(({ node }) => {
+    const el = elMap[node.id];
+    sizeCache[node.id] = { halfW: el.offsetWidth / 2, halfH: el.offsetHeight / 2 };
+  });
+
+  drawAllEdges(visible, posMap);
+}
+
+function selectAllText(el) {
+  const range = document.createRange();
+  range.selectNodeContents(el);
+  const sel = window.getSelection();
+  sel.removeAllRanges();
+  sel.addRange(range);
+}
+
+function applyRename(node, text) {
+  const custom = findCustom(node.id);
+  if (custom) {
+    const list = state.customChildren[custom._parentId];
+    const entry = list.find(c => c.id === node.id);
+    entry.text = text;
+  } else {
+    state.renamed[node.id] = text;
+  }
+  saveState(currentTopic.key, state);
+  renderCanvas();
+}
+
+function getParentId(id) {
+  function walk(node) {
+    for (const child of node.children || []) {
+      if (child.id === id) return node.id;
+      const found = walk(child);
+      if (found) return found;
+    }
+    return null;
+  }
+  const found = walk(currentTopic.tree);
+  if (found) return found;
+  for (const parentId in state.customChildren) {
+    if ((state.customChildren[parentId] || []).some(c => c.id === id)) return parentId;
+  }
+  return null;
+}
+
+function removeBlankNode(id) {
+  const custom = findCustom(id);
+  if (!custom) return;
+  const list = state.customChildren[custom._parentId];
+  state.customChildren[custom._parentId] = list.filter(c => c.id !== id);
+  delete state.customChildren[id];
+  delete state.positions[id];
+  delete state.sides[id];
+  delete state.expanded[id];
+  delete state.renamed[id];
+  if (selectedId === id) selectedId = custom._parentId;
+  saveState(currentTopic.key, state);
+  renderCanvas();
+  updateToolbar();
+}
+
+function createBlankChildAndEdit(parentId, requestedRootSide) {
+  const list = state.customChildren[parentId] || (state.customChildren[parentId] = []);
+  const newId = 'c' + Date.now() + Math.floor(Math.random() * 10000);
+  list.push({ id: newId, text: '' });
+  if (parentId === currentTopic.tree.id) state.sides[newId] = requestedRootSide || chooseRootSide();
+  state.expanded[parentId] = true;
+  saveState(currentTopic.key, state);
+  selectedId = newId;
+  renderCanvas();
+  updateToolbar();
+  requestAnimationFrame(() => {
+    const labelEl = canvasEl.querySelector('[data-id="' + newId + '"] .node-label');
+    if (labelEl) beginInlineEdit({ id: newId }, labelEl, true);
+  });
+}
+
+async function deleteSelectedNode() {
+  const sel = getSelectedNode();
+  if (!sel) return;
+  const isRoot = !sel.isCustom && sel.id === currentTopic.tree.id;
+  if (isRoot) return;
+  const ok = await showConfirm(tr('deleteNode'));
+  if (!ok) return;
+  if (sel.isCustom) {
+    const list = state.customChildren[sel.custom._parentId];
+    state.customChildren[sel.custom._parentId] = list.filter(c => c.id !== sel.id);
+  } else {
+    state.deleted[sel.id] = true;
+  }
+  delete state.customChildren[sel.id];
+  delete state.positions[sel.id];
+  delete state.sides[sel.id];
+  delete state.expanded[sel.id];
+  delete state.renamed[sel.id];
+  selectedId = null;
+  saveState(currentTopic.key, state);
+  renderCanvas();
+  updateToolbar();
+}
+
+function beginInlineEdit(node, label, isNew) {
+  const original = label.textContent;
+  label.contentEditable = 'true';
+  label.spellcheck = false;
+  label.classList.add('editing');
+  label.focus();
+
+  function finish(commit) {
+    label.removeEventListener('blur', onBlur);
+    label.removeEventListener('keydown', onKeydown);
+    label.contentEditable = 'false';
+    label.classList.remove('editing');
+    const text = label.textContent.trim();
+    if (commit && text && text !== original) {
+      applyRename(node, text);
+    } else if (commit && text) {
+    } else if (isNew) {
+      removeBlankNode(node.id);
+    } else {
+      label.textContent = original;
+    }
+  }
+  function onBlur() { finish(true); }
+  function onKeydown(ev) {
+    if (ev.key === 'Enter') {
+      ev.preventDefault();
+      ev.stopPropagation();
+      const parentId = getParentId(node.id);
+      finish(true);
+      if (parentId) createBlankChildAndEdit(parentId);
+    }
+    if (ev.key === 'Escape') {
+      ev.preventDefault();
+      ev.stopPropagation();
+      finish(false);
+    }
+  }
+  label.addEventListener('blur', onBlur);
+  label.addEventListener('keydown', onKeydown);
+}
+
+function getSelectedNode() {
+  if (!selectedId) return null;
+  if (idMap[selectedId]) return { id: selectedId, isCustom: false, node: idMap[selectedId] };
+  const custom = findCustom(selectedId);
+  if (custom) return { id: selectedId, isCustom: true, custom: custom };
+  return null;
+}
+
+function updateToolbar() {
+  const sel = getSelectedNode();
+  const isRoot = sel && !sel.isCustom && sel.id === currentTopic.tree.id;
+  btnAdd.disabled = !sel;
+  btnRename.disabled = !sel || isRoot;
+  btnDelete.disabled = !sel || isRoot;
+  btnDeleteMap.classList.toggle('hidden', !currentTopic || !currentTopic.isCustomMap);
+}
+
+function findCustom(id) {
+  for (const parentId in state.customChildren) {
+    const found = (state.customChildren[parentId] || []).find(c => c.id === id);
+    if (found) return { id: found.id, text: found.text, locked: false, _parentId: parentId };
+  }
+  return null;
+}
+
+/* ===== Dragging ===== */
+
+function onPointerDown(ev, node) {
+  if (ev.button !== 0) return;
+  ev.stopPropagation();
+  const startX = ev.clientX, startY = ev.clientY;
+  const startPos = posCache[node.id] || { x: CENTER_X, y: CENTER_Y };
+  const origX = startPos.x, origY = startPos.y;
+  dragInfo = { id: node.id, moved: false };
+  const el = ev.currentTarget;
+  el.setPointerCapture(ev.pointerId);
+
+  function onMove(mv) {
+    const dx = (mv.clientX - startX) / zoom, dy = (mv.clientY - startY) / zoom;
+    if (Math.abs(dx) > 3 || Math.abs(dy) > 3) dragInfo.moved = true;
+    const nx = origX + dx, ny = origY + dy;
+    posCache[node.id] = { x: nx, y: ny, side: (posCache[node.id] && posCache[node.id].side) || 'right' };
+    el.style.left = nx + 'px';
+    el.style.top = ny + 'px';
+    redrawEdgesFor(node.id, nx, ny);
+  }
+  function onUp() {
+    el.removeEventListener('pointermove', onMove);
+    el.removeEventListener('pointerup', onUp);
+    if (dragInfo.moved) {
+      const p = posCache[node.id];
+      state.positions[node.id] = { x: p.x, y: p.y };
+      if (isRootChild(node.id)) {
+        state.sides[node.id] = p.x < CENTER_X ? 'left' : 'right';
+      }
+      renderCanvas();
+      saveState(currentTopic.key, state);
+    }
+    setTimeout(() => (dragInfo = null), 0);
+  }
+  el.addEventListener('pointermove', onMove);
+  el.addEventListener('pointerup', onUp);
+}
+
+function redrawEdgesFor(nodeId, x, y) {
+  posCache[nodeId] = { x: x, y: y, side: (posCache[nodeId] && posCache[nodeId].side) || 'right' };
+  const visible = collectVisible(currentTopic.tree);
+  const posMap = {};
+  visible.forEach(v => (posMap[v.node.id] = v.node));
+  drawAllEdges(visible, posMap);
+}
+
+/* ===== Toolbar actions ===== */
+
+btnAdd.addEventListener('click', async () => {
+  if (!selectedId) return;
+  const text = await showPrompt(tr('newNodeText'));
+  if (!text || !text.trim()) return;
+  const parentId = selectedId;
+  const list = state.customChildren[parentId] || (state.customChildren[parentId] = []);
+  const newId = 'c' + Date.now() + Math.floor(Math.random() * 1000);
+  list.push({ id: newId, text: text.trim() });
+  if (parentId === currentTopic.tree.id) state.sides[newId] = chooseRootSide();
+  state.expanded[parentId] = true;
+  saveState(currentTopic.key, state);
+  selectedId = newId;
+  renderCanvas();
+  updateToolbar();
+});
+
+btnRename.addEventListener('click', async () => {
+  const sel = getSelectedNode();
+  if (!sel) return;
+  const currentText = sel.isCustom ? sel.custom.text : displayText(sel.node);
+  const text = await showPrompt(tr('renameNode'), currentText);
+  if (!text || !text.trim()) return;
+  if (sel.isCustom) {
+    const list = state.customChildren[sel.custom._parentId];
+    const entry = list.find(c => c.id === sel.id);
+    entry.text = text.trim();
+  } else {
+    state.renamed[sel.id] = text.trim();
+  }
+  saveState(currentTopic.key, state);
+  renderCanvas();
+});
+
+btnDelete.addEventListener('click', deleteSelectedNode);
+
+btnReset.addEventListener('click', async () => {
+  const ok = await showConfirm(tr('resetConfirm'));
+  if (!ok) return;
+  state = { customChildren: {}, positions: {}, sides: {}, expanded: {}, renamed: {}, deleted: {} };
+  restoreCanvas();
+  applyZoom();
+  selectedId = null;
+  saveState(currentTopic.key, state);
+  renderCanvas();
+  updateToolbar();
+});
+
+btnDeleteMap.addEventListener('click', () => {
+  if (currentTopic?.isCustomMap) deleteCustomMap(currentTopic.key);
+});
+
+btnExpandAll.addEventListener('click', () => {
+  (function walk(node) {
+    if (getChildren(node).length) state.expanded[node.id] = true;
+    getChildren(node).forEach(walk);
+  })(currentTopic.tree);
+  saveState(currentTopic.key, state);
+  renderCanvas();
+});
+
+btnCollapseAll.addEventListener('click', () => {
+  (function walk(node, depth) {
+    if (depth > 0 && getChildren(node).length) state.expanded[node.id] = false;
+    getChildren(node).forEach(c => walk(c, depth + 1));
+  })(currentTopic.tree, 0);
+  saveState(currentTopic.key, state);
+  renderCanvas();
+});
+
+/* ===== Keyboard shortcuts ===== */
+
+document.addEventListener('keydown', ev => {
+  if (editorView.classList.contains('hidden')) return;
+  if (!modalOverlay.classList.contains('hidden')) return;
+  const target = ev.target;
+  if (target && (target.isContentEditable || target === modalInput || target.tagName === 'BUTTON' || target.tagName === 'INPUT')) return;
+  if (!selectedId) return;
+
+  if (ev.key === 'Enter') {
+    ev.preventDefault();
+    createBlankChildAndEdit(selectedId);
+  } else if (ev.key === 'Delete' || ev.key === 'Backspace') {
+    ev.preventDefault();
+    deleteSelectedNode();
+  }
+});
+
+btnBack.addEventListener('click', goHome);
+document.querySelector('.app-title').addEventListener('click', goHome);
+
+canvasEl.addEventListener('click', () => {
+  selectedId = null;
+  renderCanvas();
+  updateToolbar();
+});
+
+/* ===== Zoom ===== */
+
+const MIN_ZOOM = 0.3, MAX_ZOOM = 2.5;
+let zoom = 1;
+
+function applyZoom() {
+  canvasScaler.style.width = canvasWidth * zoom + 'px';
+  canvasScaler.style.height = canvasHeight * zoom + 'px';
+  canvasEl.style.width = canvasWidth + 'px';
+  canvasEl.style.height = canvasHeight + 'px';
+  svgEl.setAttribute('width', canvasWidth);
+  svgEl.setAttribute('height', canvasHeight);
+  canvasEl.style.transform = 'scale(' + zoom + ')';
+  zoomLevelEl.textContent = Math.round(zoom * 100) + '%';
+}
+
+function zoomAt(newZoom, anchorClientX, anchorClientY) {
+  newZoom = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, newZoom));
+  const rect = canvasWrap.getBoundingClientRect();
+  const offsetX = anchorClientX - rect.left + canvasWrap.scrollLeft;
+  const offsetY = anchorClientY - rect.top + canvasWrap.scrollTop;
+  const pointX = offsetX / zoom, pointY = offsetY / zoom;
+  zoom = newZoom;
+  applyZoom();
+  canvasWrap.scrollLeft = pointX * zoom - (anchorClientX - rect.left);
+  canvasWrap.scrollTop = pointY * zoom - (anchorClientY - rect.top);
+}
+
+canvasWrap.addEventListener('wheel', ev => {
+  ev.preventDefault();
+  const factor = ev.deltaY < 0 ? 1.1 : 1 / 1.1;
+  zoomAt(zoom * factor, ev.clientX, ev.clientY);
+}, { passive: false });
+
+function zoomButtonStep(factor) {
+  const rect = canvasWrap.getBoundingClientRect();
+  zoomAt(zoom * factor, rect.left + rect.width / 2, rect.top + rect.height / 2);
+}
+zoomInBtn.addEventListener('click', () => zoomButtonStep(1.2));
+zoomOutBtn.addEventListener('click', () => zoomButtonStep(1 / 1.2));
+
+/* ===== Pan with right mouse button ===== */
+
+let panState = null;
+
+canvasWrap.addEventListener('contextmenu', ev => ev.preventDefault());
+
+canvasWrap.addEventListener('pointerdown', ev => {
+  if (ev.button !== 2) return;
+  ev.preventDefault();
+  panState = {
+    startX: ev.clientX,
+    startY: ev.clientY,
+    scrollLeft: canvasWrap.scrollLeft,
+    scrollTop: canvasWrap.scrollTop,
+  };
+  canvasWrap.setPointerCapture(ev.pointerId);
+  canvasWrap.classList.add('panning');
+});
+
+canvasWrap.addEventListener('pointermove', ev => {
+  if (!panState) return;
+  const dx = ev.clientX - panState.startX;
+  const dy = ev.clientY - panState.startY;
+  canvasWrap.scrollLeft = panState.scrollLeft - dx;
+  canvasWrap.scrollTop = panState.scrollTop - dy;
+});
+
+function endPan() {
+  panState = null;
+  canvasWrap.classList.remove('panning');
+}
+canvasWrap.addEventListener('pointerup', ev => {
+  if (ev.button !== 2) return;
+  endPan();
+});
+canvasWrap.addEventListener('pointercancel', endPan);
+
+/* ===== Export as high-resolution PNG ===== */
+
+function escapeXml(str) {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function buildExportSVG() {
+  layoutTree(currentTopic.tree);
+  const visible = collectVisible(currentTopic.tree);
+  const posMap = {};
+  visible.forEach(v => (posMap[v.node.id] = v.node));
+
+  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+  visible.forEach(({ node }) => {
+    const pos = posCache[node.id];
+    const sz = sizeCache[node.id] || { halfW: 70, halfH: 18 };
+    minX = Math.min(minX, pos.x - sz.halfW);
+    maxX = Math.max(maxX, pos.x + sz.halfW);
+    minY = Math.min(minY, pos.y - sz.halfH);
+    maxY = Math.max(maxY, pos.y + sz.halfH);
+  });
+  const pad = 50;
+  minX -= pad; minY -= pad; maxX += pad; maxY += pad;
+  const width = maxX - minX, height = maxY - minY;
+
+  const theme = document.documentElement.getAttribute('data-theme') || 'light';
+  const isDark = theme === 'dark';
+  const bg = isDark ? '#0F172A' : '#FAFAF7';
+  const muted = isDark ? '#94A3B8' : '#6B7C94';
+  const nodeText = isDark ? '#0A1120' : '#1A2E4A';
+  const interFont = 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+  const displayFont = 'Plus Jakarta Sans, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+  const gridColor = isDark ? '#94A3B8' : '#E8E4F0';
+  const gridOpacity = isDark ? '0.15' : '1';
+
+  // Keep the export in lockstep with the live .node depth styles above.
+  const depthStyles = [
+    { bg: '#F9D94E', size: 16, weight: 800, font: displayFont, border: '#1A2E4A', stroke: 2 },
+    { bg: isDark ? '#B8A8E8' : '#C4B5F4', size: 14, weight: 700, font: displayFont, border: 'none', stroke: 0 },
+    { bg: isDark ? '#7AB5DA' : '#93C8EE', size: 13, weight: 500, font: interFont, border: 'none', stroke: 0 },
+    { bg: isDark ? '#8FC499' : '#A8D5B2', size: 12.5, weight: 400, font: interFont, border: 'none', stroke: 0, italic: true },
+    { bg: isDark ? '#E9B992' : '#F5C9A8', size: 12.5, weight: 500, font: interFont, border: 'none', stroke: 0 },
+    { bg: isDark ? '#E99AB0' : '#F5AABC', size: 12, weight: 500, font: interFont, border: 'none', stroke: 0 },
+    { bg: isDark ? '#AABEE8' : '#BFD1F2', size: 12, weight: 500, font: interFont, border: 'none', stroke: 0 },
+  ];
+
+  const parts = [];
+  parts.push('<svg xmlns="http://www.w3.org/2000/svg" width="' + width + '" height="' + height + '" viewBox="0 0 ' + width + ' ' + height + '">');
+  parts.push('<defs><pattern id="grid" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="' + gridColor + '" opacity="' + gridOpacity + '"/></pattern><filter id="node-shadow" x="-20%" y="-30%" width="140%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#1A2E4A" flood-opacity="0.06"/></filter></defs>');
+  parts.push('<rect x="0" y="0" width="' + width + '" height="' + height + '" fill="' + bg + '"/>');
+  parts.push('<rect x="0" y="0" width="' + width + '" height="' + height + '" fill="url(#grid)"/>');
+
+  visible.forEach(({ node, parentId }) => {
+    if (!parentId) return;
+    const parent = posMap[parentId];
+    const pts = edgePoints(parent, node);
+    parts.push('<line x1="' + (pts.x1 - minX) + '" y1="' + (pts.y1 - minY) + '" x2="' + (pts.x2 - minX) + '" y2="' + (pts.y2 - minY) + '" stroke="' + muted + '" stroke-width="1.3" opacity="0.5"/>');
+  });
+
+  visible.forEach(({ node }) => {
+    const pos = posCache[node.id];
+    const sz = sizeCache[node.id] || { halfW: 70, halfH: 18 };
+    const w = sz.halfW * 2, h = sz.halfH * 2;
+    const x = pos.x - minX - sz.halfW, y = pos.y - minY - sz.halfH;
+    const cx = pos.x - minX, cy = pos.y - minY;
+    const dashed = node.locked === false;
+    const style = depthStyles[Math.min(node._depth, 6)];
+    const border = dashed ? '#C4B5F4' : style.border;
+    const strokeWidth = dashed ? 2 : style.stroke;
+    parts.push(
+      '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="12" fill="' + style.bg + '" stroke="' + border +
+      '" stroke-width="' + strokeWidth + '" filter="url(#node-shadow)"' + (dashed ? ' stroke-dasharray="5,3"' : '') + '/>'
+    );
+    parts.push(
+      '<text x="' + cx + '" y="' + cy + '" text-anchor="middle" dominant-baseline="central" font-family="' + style.font +
+      '" font-size="' + style.size + '" font-weight="' + style.weight + '"' + (style.italic ? ' font-style="italic"' : '') +
+      ' fill="' + nodeText + '">' + escapeXml(displayText(node)) + '</text>'
+    );
+  });
+
+  parts.push('</svg>');
+  return { svg: parts.join(''), width: width, height: height };
+}
+
+function svgToDataUri(svg) {
+  return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+}
+
+function triggerDownload(blob, filename) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
+}
+
+function downloadSVG(svg) {
+  triggerDownload(new Blob([svg], { type: 'image/svg+xml' }), 'examind-' + currentTopic.key + '.svg');
+}
+
+function exportHighRes() {
+  const { svg, width, height } = buildExportSVG();
+  const scale = 3;
+  const img = new Image();
+  img.onload = () => {
+    try {
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.max(1, Math.round(width * scale));
+      canvas.height = Math.max(1, Math.round(height * scale));
+      const ctx = canvas.getContext('2d');
+      ctx.scale(scale, scale);
+      ctx.drawImage(img, 0, 0, width, height);
+      canvas.toBlob(blob => {
+        if (!blob) { downloadSVG(svg); return; }
+        triggerDownload(blob, 'examind-' + currentTopic.key + '.png');
+      }, 'image/png');
+    } catch (e) {
+      downloadSVG(svg);
+    }
+  };
+  img.onerror = () => downloadSVG(svg);
+  img.src = svgToDataUri(svg);
+}
+
+btnExport.addEventListener('click', exportHighRes);
+
+/* ===== Fullscreen ===== */
+
+const fullscreenBtn = document.getElementById('fullscreen-btn');
+fullscreenBtn.addEventListener('click', () => {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(() => {});
+  } else {
+    document.exitFullscreen().catch(() => {});
+  }
+});
+document.addEventListener('fullscreenchange', () => {
+  fullscreenBtn.textContent = document.fullscreenElement ? '⤫' : '⛶';
+  fullscreenBtn.title = document.fullscreenElement ? tr('exitFullscreen') : tr('fullscreen');
+});
+
+/* ===== Theme ===== */
+
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('examind_theme', theme);
+  themeToggle.textContent = theme === 'dark' ? '☀' : '☾';
+}
+
+themeToggle.addEventListener('click', () => {
+  const current = document.documentElement.getAttribute('data-theme');
+  applyTheme(current === 'dark' ? 'light' : 'dark');
+});
+
+languageToggle.addEventListener('click', () => {
+  language = language === 'en' ? 'ru' : 'en';
+  localStorage.setItem('examind_language', language);
+  applyLanguage();
+});
+
+/* ===== Init ===== */
+
+applyTheme(localStorage.getItem('examind_theme') || 'light');
+applyLanguage();
+
+</script>
+</body>
+</html>

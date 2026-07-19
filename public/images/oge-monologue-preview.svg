@@ -1,0 +1,22 @@
+<svg width="1200" height="750" viewBox="0 0 1200 750" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="750" fill="#0B0C14"/>
+  <rect x="52" y="48" width="1096" height="654" rx="30" fill="#111320" stroke="#1E2135" stroke-width="2"/>
+  <rect x="96" y="98" width="52" height="52" rx="15" fill="url(#g)"/>
+  <text x="166" y="125" fill="#EEEEF4" font-family="Arial, sans-serif" font-size="30" font-weight="700">Monologue</text>
+  <text x="166" y="153" fill="#9193AB" font-family="Arial, sans-serif" font-size="19">OGE Task 3 · 5 cards · 5 levels</text>
+  <g font-family="Arial, sans-serif">
+    <rect x="96" y="205" width="1008" height="80" rx="20" fill="#60A5FA" fill-opacity="0.1" stroke="#60A5FA" stroke-opacity="0.35"/>
+    <text x="130" y="238" fill="#60A5FA" font-size="16" font-weight="700">LEVEL 1</text><text x="130" y="266" fill="#EEEEF4" font-size="24" font-weight="700">Match</text>
+    <text x="360" y="251" fill="#9193AB" font-size="19">Connect each monologue part to the task point it answers</text>
+    <rect x="96" y="307" width="1008" height="80" rx="20" fill="#C084FC" fill-opacity="0.1" stroke="#C084FC" stroke-opacity="0.35"/>
+    <text x="130" y="340" fill="#C084FC" font-size="16" font-weight="700">LEVEL 2</text><text x="130" y="368" fill="#EEEEF4" font-size="24" font-weight="700">Reconstruct</text>
+    <text x="360" y="353" fill="#9193AB" font-size="19">Read the monologue and work out the original task</text>
+    <rect x="96" y="409" width="1008" height="80" rx="20" fill="#FB923C" fill-opacity="0.1" stroke="#FB923C" stroke-opacity="0.35"/>
+    <text x="130" y="442" fill="#FB923C" font-size="16" font-weight="700">LEVEL 3</text><text x="130" y="470" fill="#EEEEF4" font-size="24" font-weight="700">Speak</text>
+    <text x="360" y="455" fill="#9193AB" font-size="19">Answer one task point out loud in 30 seconds</text>
+    <rect x="96" y="511" width="1008" height="80" rx="20" fill="#4ADE80" fill-opacity="0.1" stroke="#4ADE80" stroke-opacity="0.35"/>
+    <text x="130" y="544" fill="#4ADE80" font-size="16" font-weight="700">LEVEL 4</text><text x="130" y="572" fill="#EEEEF4" font-size="24" font-weight="700">Write</text>
+    <text x="360" y="557" fill="#9193AB" font-size="19">Write a full model monologue from the task card</text>
+  </g>
+  <defs><linearGradient id="g" x1="96" y1="98" x2="148" y2="150" gradientUnits="userSpaceOnUse"><stop stop-color="#818CF8"/><stop offset="1" stop-color="#C084FC"/></linearGradient></defs>
+</svg>

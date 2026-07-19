@@ -1,0 +1,9 @@
+RewriteEngine On
+
+# Keep real files and the separately deployed mini-apps reachable.
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Let the React app render direct visits to /extra, /contacts, and /privacy.
+RewriteRule ^ index.html [L]

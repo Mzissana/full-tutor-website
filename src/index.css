@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: light; }
+
+html,
+body,
+#root {
+  min-width: 320px;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+}
+
+body {
+  @apply bg-cream text-navy font-sans antialiased;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: #F5AABC; color: #1A2E4A; }
+
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #F2EFFD; }
+::-webkit-scrollbar-thumb { background: #C4B5F4; border-radius: 99px; border: 2px solid #F2EFFD; }
+::-webkit-scrollbar-thumb:hover { background: #93C8EE; }
+
+@layer components {
+  .container-px {
+    @apply mx-auto w-full max-w-content px-5 sm:px-8 lg:px-10;
+  }
+
+  /* Buttons */
+  .btn-butter {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-butter px-6 py-3.5 text-base font-bold text-navy shadow-card transition-all duration-300 hover:-translate-y-0.5 hover:shadow-float active:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-butter;
+  }
+  .btn-navy {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-navy px-6 py-3.5 text-base font-bold text-white shadow-card transition-all duration-300 hover:-translate-y-0.5 hover:bg-navy-light hover:shadow-float active:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border-2 border-navy/20 bg-white/80 px-6 py-3.5 text-base font-bold text-navy backdrop-blur transition-all duration-300 hover:border-navy/50 hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy;
+  }
+  .btn-blush {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-blush px-6 py-3.5 text-base font-bold text-navy shadow-card transition-all duration-300 hover:-translate-y-0.5 hover:shadow-float active:translate-y-0;
+  }
+
+  /* Cards */
+  .card {
+    @apply rounded-3xl bg-white shadow-card transition-all duration-300;
+  }
+  .card-tilt-r {
+    @apply rotate-1 hover:rotate-0 hover:shadow-float transition-all duration-300;
+  }
+  .card-tilt-l {
+    @apply -rotate-1 hover:rotate-0 hover:shadow-float transition-all duration-300;
+  }
+
+  /* Typography */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.18em];
+  }
+  .section-title {
+    @apply font-display text-3xl font-extrabold leading-tight tracking-tight text-navy sm:text-4xl lg:text-[2.75rem];
+  }
+  .section-body {
+    @apply text-base leading-relaxed text-navy/70 sm:text-lg;
+  }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .text-pretty  { text-wrap: pretty; }
+
+  /* Pastel blob shapes used in hero */
+  .blob {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    animation: blob 8s ease-in-out infinite;
+  }
+  .blob-2 {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+    animation: blob 10s ease-in-out infinite reverse;
+  }
+
+  /* Section tinted backgrounds */
+  .bg-wash-butter   { background-color: #FFFBEA; }
+  .bg-wash-lavender { background-color: #F2EFFD; }
+  .bg-wash-sky      { background-color: #EAF5FD; }
+  .bg-wash-mint     { background-color: #EBF6EE; }
+  .bg-wash-peach    { background-color: #FEF3EC; }
+  .bg-wash-blush    { background-color: #FEF0F3; }
+}

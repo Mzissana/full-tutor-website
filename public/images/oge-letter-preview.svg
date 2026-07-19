@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500" role="img" aria-label="ОГЭ электронное письмо preview">
+  <rect width="800" height="500" fill="#FCFBF8"/>
+  <circle cx="714" cy="55" r="130" fill="#C4B5F4" opacity=".42"/><circle cx="72" cy="470" r="144" fill="#A8D5B2" opacity=".36"/>
+  <rect x="76" y="53" width="648" height="392" rx="28" fill="#FFF" stroke="#DCE3EC" stroke-width="2"/>
+  <rect x="76" y="53" width="648" height="138" rx="28" fill="#1E3150"/>
+  <circle cx="669" cy="87" r="42" fill="#C4B5F4"/><circle cx="703" cy="139" r="22" fill="#93C8EE" opacity=".8"/>
+  <text x="115" y="92" fill="#E6DDFF" font-family="Arial, sans-serif" font-size="14" font-weight="700">WORKSHEET 01  |  ОГЭ</text>
+  <text x="115" y="132" fill="#fff" font-family="Arial, sans-serif" font-size="29" font-weight="700">Электронное письмо</text>
+  <text x="115" y="159" fill="#D7E5F6" font-family="Arial, sans-serif" font-size="16">Структура, фразы и практика</text>
+  <g font-family="Arial, sans-serif" font-weight="700"><rect x="111" y="220" width="166" height="72" rx="15" fill="#EEF7FC"/><text x="131" y="251" fill="#1E3150" font-size="24">100–120</text><text x="131" y="274" fill="#667795" font-size="13">слов в письме</text><rect x="300" y="220" width="166" height="72" rx="15" fill="#EFF8F1"/><text x="320" y="251" fill="#1E3150" font-size="24">3</text><text x="320" y="274" fill="#667795" font-size="13">полных ответа</text><rect x="489" y="220" width="166" height="72" rx="15" fill="#F4F1FD"/><text x="509" y="251" fill="#1E3150" font-size="24">5</text><text x="509" y="274" fill="#667795" font-size="13">частей письма</text></g>
+  <rect x="112" y="354" width="490" height="16" rx="8" fill="#EEF7FC"/><rect x="112" y="380" width="430" height="16" rx="8" fill="#F4F1FD"/><rect x="112" y="406" width="365" height="16" rx="8" fill="#EFF8F1"/>
+</svg>
