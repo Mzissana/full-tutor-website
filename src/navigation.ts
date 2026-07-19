@@ -5,6 +5,10 @@ type Navigate = (page: PageKey, hash?: string) => void;
 
 export const PAGE_PATHS: Record<PageKey, string> = {
   home: '/',
+  ogePrep: '/podgotovka-k-oge-po-angliyskomu',
+  egePrep: '/podgotovka-k-ege-po-angliyskomu',
+  schoolEnglish: '/angliyskiy-dlya-shkolnikov',
+  teenSpeaking: '/razgovornyy-angliyskiy-dlya-podrostkov',
   materials: '/extra',
   examind: '/extra/examind',
   ogeMonologue: '/extra/oge-monologue',
@@ -18,10 +22,10 @@ export function routeHref(page: PageKey, hash?: string): string {
   return hash ? `${PAGE_PATHS[page]}#${hash}` : PAGE_PATHS[page];
 }
 
-export function pageFromPathname(pathname: string): PageKey {
+export function pageFromPathname(pathname: string): PageKey | null {
   const normalizedPath = pathname.replace(/\/$/, '') || '/';
   const entry = Object.entries(PAGE_PATHS).find(([, path]) => path === normalizedPath);
-  return (entry?.[0] as PageKey | undefined) ?? 'home';
+  return (entry?.[0] as PageKey | undefined) ?? null;
 }
 
 export function navigateFromLink(

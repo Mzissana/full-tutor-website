@@ -29,6 +29,7 @@ import { TeacherPhoto } from '../components/TeacherPhoto';
 import { TelegramButton, VkButton } from '../components/TelegramButton';
 import { SmartImage } from '../components/SmartImage';
 import { SITE, REVIEWS } from '../config';
+import type { PageKey } from '../config';
 import { contactEndpoint } from '../contactEndpoint';
 import { navigateFromLink, routeHref } from '../navigation';
 import { useRouter } from '../router';
@@ -108,7 +109,7 @@ function Hero() {
         <Reveal delay={200} className="relative">
           <div className="relative mx-auto max-w-sm lg:max-w-none">
             <div className="overflow-hidden rounded-[2.5rem] border border-white/80 shadow-float">
-              <TeacherPhoto className="rounded-[2.5rem]" />
+              <TeacherPhoto className="rounded-[2.5rem]" loading="eager" />
             </div>
             {/* Floating stat cards */}
             <div className="absolute -bottom-5 -left-3 hidden animate-floatY rounded-2xl bg-white p-4 shadow-float sm:block">
@@ -177,15 +178,17 @@ function Audience() {
 
 /* ---------------- Directions ---------------- */
 
-const DIRECTIONS = [
-  { icon: BookOpen, title: 'Английский для школы', desc: 'Помощь с программой и домашними заданиями', bg: 'bg-lavender/30', hoverBg: 'hover:bg-wash-lavender' },
+const DIRECTIONS: { icon: typeof BookOpen; title: string; desc: string; bg: string; hoverBg: string; page?: PageKey }[] = [
+  { icon: BookOpen, title: 'Английский для школы', desc: 'Помощь с программой и домашними заданиями', bg: 'bg-lavender/30', hoverBg: 'hover:bg-wash-lavender', page: 'schoolEnglish' },
   { icon: ClipboardCheck, title: 'Подготовка к ВПР', desc: 'Отработка формата и ключевых тем ВПР', bg: 'bg-sky/30', hoverBg: 'hover:bg-wash-sky' },
-  { icon: PenLine, title: 'Подготовка к ОГЭ', desc: 'Все разделы экзамена и устная часть', bg: 'bg-blush/30', hoverBg: 'hover:bg-wash-blush' },
-  { icon: GraduationCap, title: 'Подготовка к ЕГЭ', desc: 'Письмо, эссе, чтение, аудирование, говорение', bg: 'bg-butter/30', hoverBg: 'hover:bg-wash-butter' },
-  { icon: MessagesSquare, title: 'Разговорный английский', desc: 'Развиваем беглость и понимание на слух', bg: 'bg-mint/30', hoverBg: 'hover:bg-wash-mint' },
+  { icon: PenLine, title: 'Подготовка к ОГЭ', desc: 'Все разделы экзамена и устная часть', bg: 'bg-blush/30', hoverBg: 'hover:bg-wash-blush', page: 'ogePrep' },
+  { icon: GraduationCap, title: 'Подготовка к ЕГЭ', desc: 'Письмо, чтение, аудирование и говорение', bg: 'bg-butter/30', hoverBg: 'hover:bg-wash-butter', page: 'egePrep' },
+  { icon: MessagesSquare, title: 'Разговорный английский', desc: 'Развиваем беглость и понимание на слух', bg: 'bg-mint/30', hoverBg: 'hover:bg-wash-mint', page: 'teenSpeaking' },
 ];
 
 function Directions() {
+  const { navigate } = useRouter();
+
   return (
     <section id="directions" className="scroll-mt-24 bg-wash-lavender py-16 sm:py-24">
       <div className="container-px">
@@ -198,7 +201,19 @@ function Directions() {
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:mt-14 lg:grid-cols-3">
           {DIRECTIONS.map((d, i) => (
             <Reveal key={d.title} delay={i * 80} as="article">
-              <div className={`card ${i % 2 === 0 ? 'card-tilt-l' : 'card-tilt-r'} group ${d.hoverBg} h-full p-6`}>
+              {d.page ? (
+                <a href={routeHref(d.page)} onClick={(event) => navigateFromLink(event, navigate, d.page!)} className={`card ${i % 2 === 0 ? 'card-tilt-l' : 'card-tilt-r'} group ${d.hoverBg} block h-full p-6`}>
+                  <div className="flex items-start justify-between gap-4">
+                    <div className={`flex h-12 w-12 items-center justify-center rounded-2xl ${d.bg} text-navy transition-transform duration-300 group-hover:scale-110`}>
+                      <d.icon className="h-6 w-6" />
+                    </div>
+                    <ArrowRight className="h-5 w-5 text-navy/35 transition-transform group-hover:translate-x-1" />
+                  </div>
+                  <h3 className="mt-5 font-display text-lg font-bold text-navy">{d.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-navy/65">{d.desc}</p>
+                </a>
+              ) : (
+                <div className={`card ${i % 2 === 0 ? 'card-tilt-l' : 'card-tilt-r'} group ${d.hoverBg} h-full p-6`}>
                 <div className="flex items-start justify-between gap-4">
                   <div className={`flex h-12 w-12 items-center justify-center rounded-2xl ${d.bg} text-navy transition-transform duration-300 group-hover:scale-110`}>
                     <d.icon className="h-6 w-6" />
@@ -206,7 +221,8 @@ function Directions() {
                 </div>
                 <h3 className="mt-5 font-display text-lg font-bold text-navy">{d.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-navy/65">{d.desc}</p>
-              </div>
+                </div>
+              )}
             </Reveal>
           ))}
         </div>
@@ -443,7 +459,7 @@ function About() {
             <div className="relative mx-auto max-w-sm lg:max-w-none lg:sticky lg:top-28">
               <div className="absolute -inset-3 -z-10 rounded-[2.4rem] bg-blush/20 blur-2xl" />
               <div className="overflow-hidden rounded-[2.5rem] shadow-float">
-                <TeacherPhoto src="/images/teacher-hero-original.png" className="rounded-[2.5rem]" />
+                <TeacherPhoto src="/images/teacher-hero-original.webp" width={732} height={740} className="rounded-[2.5rem]" />
               </div>
             </div>
           </Reveal>

@@ -3,8 +3,8 @@ import { PAGE_PATHS } from './navigation';
 
 export const SITE_ORIGIN = 'https://mzissana.ru';
 const SITE_NAME = 'MzissanaEnglish';
-const SOCIAL_IMAGE = `${SITE_ORIGIN}/images/teacher-hero.png`;
-const SOCIAL_IMAGE_TYPE = 'image/png';
+const SOCIAL_IMAGE = `${SITE_ORIGIN}/images/teacher-hero-social.jpg`;
+const SOCIAL_IMAGE_TYPE = 'image/jpeg';
 const SOCIAL_IMAGE_WIDTH = 1122;
 const SOCIAL_IMAGE_HEIGHT = 1402;
 
@@ -25,6 +25,22 @@ const PAGE_COPY: Record<PageKey, { title: string; description: string }> = {
   home: {
     title: 'MzissanaEnglish — английский для школьников',
     description: 'Онлайн-занятия по английскому для школьников 5–11 классов: школьная программа, разговорная практика, подготовка к ОГЭ и ЕГЭ.',
+  },
+  ogePrep: {
+    title: 'Подготовка к ОГЭ по английскому языку онлайн — MzissanaEnglish',
+    description: 'Индивидуальная онлайн-подготовка к ОГЭ по английскому языку: все разделы экзамена, устная и письменная практика, пробные задания и работа над ошибками.',
+  },
+  egePrep: {
+    title: 'Подготовка к ЕГЭ по английскому языку онлайн — MzissanaEnglish',
+    description: 'Системная индивидуальная подготовка к ЕГЭ по английскому языку: чтение, аудирование, грамматика, лексика, письмо и устная часть.',
+  },
+  schoolEnglish: {
+    title: 'Английский для школьников 5–11 классов — MzissanaEnglish',
+    description: 'Индивидуальные онлайн-занятия английским для школьников 5–11 классов: помощь со школьной программой, грамматикой, лексикой и домашними заданиями.',
+  },
+  teenSpeaking: {
+    title: 'Разговорный английский для подростков онлайн — MzissanaEnglish',
+    description: 'Онлайн-занятия разговорным английским для подростков: уверенная речь, понимание на слух, тематическая лексика и регулярная разговорная практика.',
   },
   materials: {
     title: 'Материалы по английскому языку — MzissanaEnglish',

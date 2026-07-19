@@ -7,13 +7,15 @@ interface SmartImageProps {
   className?: string;
   imgClassName?: string;
   loading?: 'lazy' | 'eager';
+  width?: number;
+  height?: number;
 }
 
 /**
  * Image with graceful fallback to a neutral placeholder block if the
  * external photo fails to load.
  */
-export function SmartImage({ src, alt, className = '', imgClassName = '', loading = 'lazy' }: SmartImageProps) {
+export function SmartImage({ src, alt, className = '', imgClassName = '', loading = 'lazy', width = 1100, height = 825 }: SmartImageProps) {
   const [error, setError] = useState(false);
 
   if (error) {
@@ -33,7 +35,10 @@ export function SmartImage({ src, alt, className = '', imgClassName = '', loadin
       <img
         src={src}
         alt={alt}
+        width={width}
+        height={height}
         loading={loading}
+        decoding="async"
         onError={() => setError(true)}
         className={`h-full w-full object-cover ${imgClassName}`}
       />

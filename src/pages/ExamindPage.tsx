@@ -3,6 +3,7 @@ import { Network } from 'lucide-react';
 import { Reveal } from '../components/Reveal';
 import { TelegramButton } from '../components/TelegramButton';
 import { HomeContactForm } from './HomePage';
+import { ToolStudyGuide } from '../components/ToolStudyGuide';
 
 export function ExamindPage() {
   const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -77,6 +78,8 @@ export function ExamindPage() {
           </Reveal>
         </div>
       </section>
+
+      <ToolStudyGuide guide="mindmaps" />
 
       <HomeContactForm />
     </main>

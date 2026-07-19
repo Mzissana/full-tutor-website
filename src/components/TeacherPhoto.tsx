@@ -4,13 +4,22 @@ import { SITE } from '../config';
 interface TeacherPhotoProps {
   className?: string;
   src?: string;
+  loading?: 'lazy' | 'eager';
+  width?: number;
+  height?: number;
 }
 
 /**
  * Renders the teacher's photo from a single placeholder.
  * Replace SITE.photo in src/config.ts with a real URL/path.
  */
-export function TeacherPhoto({ className = '', src = SITE.photo }: TeacherPhotoProps) {
+export function TeacherPhoto({
+  className = '',
+  src = SITE.photo,
+  loading = 'lazy',
+  width = 853,
+  height = 1280,
+}: TeacherPhotoProps) {
   const isPlaceholder = src === 'PHOTO_PLACEHOLDER';
 
   if (isPlaceholder) {
@@ -39,8 +48,11 @@ export function TeacherPhoto({ className = '', src = SITE.photo }: TeacherPhotoP
     <img
       src={src}
       alt="Мзиссана — преподаватель английского языка"
+      width={width}
+      height={height}
       className={`aspect-[4/5] w-full object-cover shadow-float ${className}`}
-      loading="lazy"
+      loading={loading}
+      decoding="async"
     />
   );
 }

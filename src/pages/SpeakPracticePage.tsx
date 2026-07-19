@@ -2,6 +2,7 @@ import { Mic } from 'lucide-react';
 import { Reveal } from '../components/Reveal';
 import { TelegramButton } from '../components/TelegramButton';
 import { HomeContactForm } from './HomePage';
+import { ToolStudyGuide } from '../components/ToolStudyGuide';
 
 export function SpeakPracticePage() {
   return (
@@ -54,6 +55,8 @@ export function SpeakPracticePage() {
           </Reveal>
         </div>
       </section>
+
+      <ToolStudyGuide guide="questions" />
 
       <HomeContactForm />
     </main>

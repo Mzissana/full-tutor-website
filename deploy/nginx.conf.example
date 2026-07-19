@@ -1,0 +1,68 @@
+# Replace /var/www/mzissana/dist with the absolute deployed dist directory.
+# Add any known legacy hostnames to the redirecting server_name directive.
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name mzissana.ru www.mzissana.ru;
+    return 301 https://mzissana.ru$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    server_name www.mzissana.ru;
+
+    # Keep the existing certificate directives supplied by the hosting provider.
+    return 301 https://mzissana.ru$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    server_name mzissana.ru;
+
+    root /var/www/mzissana/dist;
+    index index.html;
+
+    # Keep the existing certificate directives supplied by the hosting provider.
+
+    gzip on;
+    gzip_vary on;
+    gzip_types text/plain text/css application/javascript application/json application/xml image/svg+xml;
+
+    error_page 404 /404.html;
+    location = /404.html { internal; }
+
+    location = /index.html { return 301 /; }
+    location = /extra.html { return 301 /extra; }
+    location ~ ^/(contacts|privacy|podgotovka-k-oge-po-angliyskomu|podgotovka-k-ege-po-angliyskomu|angliyskiy-dlya-shkolnikov|razgovornyy-angliyskiy-dlya-podrostkov)\.html$ {
+        return 301 /$1;
+    }
+    location ~ ^/extra/(examind|oge-monologue|speaking-practice|oge-electronic-letter)\.html$ {
+        return 301 /extra/$1;
+    }
+
+    location ~ ^/(extra|contacts|privacy|podgotovka-k-oge-po-angliyskomu|podgotovka-k-ege-po-angliyskomu|angliyskiy-dlya-shkolnikov|razgovornyy-angliyskiy-dlya-podrostkov)/$ {
+        return 301 https://mzissana.ru/$1;
+    }
+    location ~ ^/extra/(examind|oge-monologue|speaking-practice|oge-electronic-letter)/$ {
+        return 301 https://mzissana.ru/extra/$1;
+    }
+
+    location ~* \.(?:css|js|webp|avif|png|jpg|jpeg|svg|woff2)$ {
+        try_files $uri =404;
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+    }
+
+    location = / {
+        try_files /index.html =404;
+    }
+
+    # Clean routes resolve only when a matching prerendered .html file exists.
+    # Unknown routes therefore return the custom HTTP 404 page.
+    location / {
+        try_files $uri.html $uri =404;
+    }
+}

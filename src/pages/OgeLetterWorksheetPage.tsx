@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { ArrowLeft, Download, FileText, Home, Maximize2, Moon, Sun } from 'lucide-react';
 import { navigateFromLink, routeHref } from '../navigation';
 import { useRouter } from '../router';
+import { ToolStudyGuide } from '../components/ToolStudyGuide';
 
 const WORKSHEET_SOURCE = '/worksheets/oge-electronic-letter/index.html';
 
@@ -86,6 +87,8 @@ export function OgeLetterWorksheetPage() {
           </section>
         </div>
       </section>
+
+      <ToolStudyGuide guide="letter" />
     </main>
   );
 }

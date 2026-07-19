@@ -12,7 +12,7 @@ export const SITE = {
   role: 'Преподаватель английского языка',
   telegram: 'https://t.me/mzissana',
   vk: 'https://vk.com/kmd2000',
-  photo: '/images/teacher-about.png',
+  photo: '/images/teacher-about.webp',
   sinceYear: 2019,
   email: 'https://t.me/mzissana',
 };
@@ -193,7 +193,19 @@ export interface NavLink {
   hash?: string;
 }
 
-export type PageKey = 'home' | 'materials' | 'contacts' | 'privacy' | 'examind' | 'ogeMonologue' | 'speakPractice' | 'ogeElectronicLetter';
+export type PageKey =
+  | 'home'
+  | 'ogePrep'
+  | 'egePrep'
+  | 'schoolEnglish'
+  | 'teenSpeaking'
+  | 'materials'
+  | 'contacts'
+  | 'privacy'
+  | 'examind'
+  | 'ogeMonologue'
+  | 'speakPractice'
+  | 'ogeElectronicLetter';
 
 export const NAV_LINKS: NavLink[] = [
   { label: 'Главная', page: 'home' },

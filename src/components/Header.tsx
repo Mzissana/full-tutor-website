@@ -36,7 +36,11 @@ export function Header() {
   const isActive = (label: string) => {
     const link = NAV_LINKS.find((l) => l.label === label);
     if (!link) return false;
-    if (link.page === 'materials' && ['examind', 'ogeMonologue', 'speakPractice', 'ogeElectronicLetter'].includes(page)) return true;
+    if (
+      link.page === 'materials' &&
+      page !== null &&
+      ['examind', 'ogeMonologue', 'speakPractice', 'ogeElectronicLetter'].includes(page)
+    ) return true;
     if (link.hash) return page === link.page && hash === link.hash;
     return page === link.page && !hash;
   };

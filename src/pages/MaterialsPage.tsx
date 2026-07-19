@@ -62,7 +62,10 @@ function MaterialCard({ material, index }: { material: Material; index: number }
             <img
               src={material.cover}
               alt=""
+              width="800"
+              height="500"
               loading="lazy"
+              decoding="async"
               className={`h-full w-full object-cover transition-transform duration-500 ${
                 material.id === 'examind' ? 'scale-[1.08]' : 'hover:scale-105'
               }`}

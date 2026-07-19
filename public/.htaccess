@@ -2,6 +2,11 @@ ErrorDocument 404 /404.html
 
 RewriteEngine On
 
+# Canonical host: HTTPS without www. Old domains can use the same virtual host.
+RewriteCond %{HTTPS} !=on [OR]
+RewriteCond %{HTTP_HOST} !^mzissana\.ru$ [NC]
+RewriteRule ^ https://mzissana.ru%{REQUEST_URI} [R=301,L,NE]
+
 # Redirect directly requested prerender files without affecting internal rewrites.
 RewriteCond %{THE_REQUEST} \s/+index\.html[?\s] [NC]
 RewriteRule ^index\.html$ / [R=301,L]
@@ -11,18 +16,37 @@ RewriteCond %{THE_REQUEST} \s/+extra/(examind|oge-monologue|speaking-practice|og
 RewriteRule ^extra/(examind|oge-monologue|speaking-practice|oge-electronic-letter)\.html$ /extra/$1 [R=301,L]
 RewriteCond %{THE_REQUEST} \s/+(contacts|privacy)\.html[?\s] [NC]
 RewriteRule ^(contacts|privacy)\.html$ /$1 [R=301,L]
+RewriteCond %{THE_REQUEST} \s/+(podgotovka-k-oge-po-angliyskomu|podgotovka-k-ege-po-angliyskomu|angliyskiy-dlya-shkolnikov|razgovornyy-angliyskiy-dlya-podrostkov)\.html[?\s] [NC]
+RewriteRule ^(podgotovka-k-oge-po-angliyskomu|podgotovka-k-ege-po-angliyskomu|angliyskiy-dlya-shkolnikov|razgovornyy-angliyskiy-dlya-podrostkov)\.html$ /$1 [R=301,L]
 
 # Normalize alternate trailing-slash URLs to the canonical clean paths.
 RewriteRule ^extra/$ /extra [R=301,L]
 RewriteRule ^extra/(examind|oge-monologue|speaking-practice|oge-electronic-letter)/$ /extra/$1 [R=301,L]
 RewriteRule ^(contacts|privacy)/$ /$1 [R=301,L]
+RewriteRule ^(podgotovka-k-oge-po-angliyskomu|podgotovka-k-ege-po-angliyskomu|angliyskiy-dlya-shkolnikov|razgovornyy-angliyskiy-dlya-podrostkov)/$ /$1 [R=301,L]
 
 # Serve build-time prerendered pages at their clean canonical URLs.
 RewriteRule ^extra/?$ extra.html [L]
 RewriteRule ^extra/(examind|oge-monologue|speaking-practice|oge-electronic-letter)/?$ extra/$1.html [L]
 RewriteRule ^(contacts|privacy)/?$ $1.html [L]
+RewriteRule ^(podgotovka-k-oge-po-angliyskomu|podgotovka-k-ege-po-angliyskomu|angliyskiy-dlya-shkolnikov|razgovornyy-angliyskiy-dlya-podrostkov)/?$ $1.html [L]
 
 # Keep real files and the separately deployed mini-apps reachable.
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/avif "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css application/javascript application/json application/xml image/svg+xml
+</IfModule>

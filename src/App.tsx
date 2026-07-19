@@ -11,17 +11,30 @@ import { ExamindPage } from './pages/ExamindPage';
 import { OgeMonologuePage } from './pages/OgeMonologuePage';
 import { SpeakPracticePage } from './pages/SpeakPracticePage';
 import { OgeLetterWorksheetPage } from './pages/OgeLetterWorksheetPage';
-import { applySeoMetadata } from './seo-client';
+import { ServicePage } from './pages/ServicePage';
+import { NotFoundPage } from './pages/NotFoundPage';
+import { applyNotFoundSeo, applySeoMetadata } from './seo-client';
 import { getPageSeo } from './seo';
 
 function PageView() {
   const { page } = useRouter();
 
   useEffect(() => {
+    if (page === null) {
+      applyNotFoundSeo();
+      return;
+    }
     applySeoMetadata(getPageSeo(page));
   }, [page]);
 
   switch (page) {
+    case null:
+      return <NotFoundPage />;
+    case 'ogePrep':
+    case 'egePrep':
+    case 'schoolEnglish':
+    case 'teenSpeaking':
+      return <ServicePage page={page} />;
     case 'contacts':
       return <ContactsPage />;
     case 'materials':

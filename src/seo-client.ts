@@ -51,3 +51,25 @@ export function applySeoMetadata(seo: PageSeo) {
   }
   structuredData.textContent = JSON.stringify(seo.structuredData);
 }
+
+export function applyNotFoundSeo() {
+  document.title = 'Страница не найдена — MzissanaEnglish';
+  setMeta(
+    'meta[name="description"]',
+    'name',
+    'description',
+    'Запрошенная страница не найдена. Перейдите на главную страницу MzissanaEnglish или откройте учебные материалы.',
+  );
+  setMeta('meta[name="robots"]', 'name', 'robots', 'noindex, follow');
+  setMeta('meta[property="og:title"]', 'property', 'og:title', 'Страница не найдена — MzissanaEnglish');
+  setMeta(
+    'meta[property="og:description"]',
+    'property',
+    'og:description',
+    'Запрошенная страница не найдена на сайте MzissanaEnglish.',
+  );
+  setMeta('meta[property="og:url"]', 'property', 'og:url', window.location.href);
+
+  document.head.querySelector('link[rel="canonical"]')?.remove();
+  document.head.querySelector('#structured-data')?.remove();
+}

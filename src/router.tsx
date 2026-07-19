@@ -5,14 +5,14 @@ import type { PageKey } from './config';
 import { pageFromPathname, routeHref } from './navigation';
 
 interface RouterContextValue {
-  page: PageKey;
+  page: PageKey | null;
   hash: string;
   navigate: (page: PageKey, hash?: string) => void;
 }
 
 const RouterContext = createContext<RouterContextValue | null>(null);
 
-function parseLocation(initialUrl?: string): { page: PageKey; hash: string } {
+function parseLocation(initialUrl?: string): { page: PageKey | null; hash: string } {
   const location = initialUrl ?? `${window.location.pathname}${window.location.search}${window.location.hash}`;
   const [pathAndQuery, hash = ''] = location.split('#', 2);
   const pathname = pathAndQuery.split('?', 1)[0];
