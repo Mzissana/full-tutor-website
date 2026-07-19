@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+import { Mic, Puzzle, Search, Pen, GraduationCap, BookOpen, Clock, Activity, Laptop, Building2, Shuffle, Expand, Minimize, Download, Play, Pause, Check, PartyPopper, ThumbsUp, Sun, Moon, ArrowLeft, X } from "lucide-react";
 
 // ── Global styles ─────────────────────────────────────────────────────────────
 if (!document.getElementById("mg-s")) {
@@ -65,11 +66,11 @@ const THEMES = {
 
 // ── Level metadata ────────────────────────────────────────────────────────────
 const LEVELS = [
-  { id:1, name:"Match",       icon:"🧩", color:"#93C8EE", bg:"#EAF5FD", darkBg:"#17283C", desc:"Connect each monologue part to the task point it answers" },
-  { id:2, name:"Reconstruct", icon:"🔍", color:"#C4B5F4", bg:"#F2EFFD", darkBg:"#2A2242", desc:"Read the monologue and work out the original task" },
-  { id:3, name:"Speak",       icon:"🎙️", color:"#F5C9A8", bg:"#FEF3EC", darkBg:"#3A2922", desc:"Answer one task point out loud in 30 seconds" },
-  { id:4, name:"Write",       icon:"✍️", color:"#A8D5B2", bg:"#EBF6EE", darkBg:"#20362A", desc:"Write a full model monologue from the task card" },
-  { id:5, name:"Exam",        icon:"🎓", color:"#F5AABC", bg:"#FEF0F3", darkBg:"#3A2530", desc:"Full exam simulation with preparation and speaking timers" },
+  { id:1, name:"Match",       icon:Puzzle,        color:"#93C8EE", bg:"#EAF5FD", darkBg:"#17283C", desc:"Connect each monologue part to the task point it answers" },
+  { id:2, name:"Reconstruct", icon:Search,        color:"#C4B5F4", bg:"#F2EFFD", darkBg:"#2A2242", desc:"Read the monologue and work out the original task" },
+  { id:3, name:"Speak",       icon:Mic,           color:"#F5C9A8", bg:"#FEF3EC", darkBg:"#3A2922", desc:"Answer one task point out loud in 30 seconds" },
+  { id:4, name:"Write",       icon:Pen,           color:"#A8D5B2", bg:"#EBF6EE", darkBg:"#20362A", desc:"Write a full model monologue from the task card" },
+  { id:5, name:"Exam",        icon:GraduationCap, color:"#F5AABC", bg:"#FEF0F3", darkBg:"#3A2530", desc:"Full exam simulation with preparation and speaking timers" },
 ];
 
 const PREP_DURATIONS = [5, 10, 20, 30];
@@ -103,7 +104,7 @@ const TEXT_OPTIONS = {
 };
 const TASK_CARDS = [
   {
-    id:"school", category:"School", emoji:"📚", color:"#60A5FA", bg:"rgba(96,165,250,0.09)",
+    id:"school", category:"School", icon:BookOpen, color:"#93C8EE", bg:"#EAF5FD",
     taskTopic:"your school", monologueTopic:"school",
     points:[
       "what your typical school day is like",
@@ -123,7 +124,7 @@ const TASK_CARDS = [
     },
   },
   {
-    id:"daily-routine", category:"Daily Life", emoji:"⏰", color:"#4ADE80", bg:"rgba(74,222,128,0.09)",
+    id:"daily-routine", category:"Daily Life", icon:Clock, color:"#A8D5B2", bg:"#EBF6EE",
     taskTopic:"your daily routine", monologueTopic:"my daily routine",
     points:[
       "what time you usually get up and how you get to school",
@@ -143,7 +144,7 @@ const TASK_CARDS = [
     },
   },
   {
-    id:"sport", category:"Sport & Health", emoji:"⚽", color:"#FB923C", bg:"rgba(251,146,60,0.09)",
+    id:"sport", category:"Sport & Health", icon:Activity, color:"#F5C9A8", bg:"#FEF3EC",
     taskTopic:"sport and a healthy lifestyle", monologueTopic:"sport and a healthy lifestyle",
     points:[
       "what sport or physical activity you do regularly",
@@ -163,7 +164,7 @@ const TASK_CARDS = [
     },
   },
   {
-    id:"technology", category:"Technology", emoji:"💻", color:"#2DD4BF", bg:"rgba(45,212,191,0.09)",
+    id:"technology", category:"Technology", icon:Laptop, color:"#C4B5F4", bg:"#F2EFFD",
     taskTopic:"technology and the Internet", monologueTopic:"technology and the Internet",
     points:[
       "how often you use the Internet and what for",
@@ -183,7 +184,7 @@ const TASK_CARDS = [
     },
   },
   {
-    id:"my-town", category:"My Town", emoji:"🌆", color:"#818CF8", bg:"rgba(129,140,248,0.09)",
+    id:"my-town", category:"My Town", icon:Building2, color:"#F5AABC", bg:"#FEF0F3",
     taskTopic:"the place where you live", monologueTopic:"the place where I live",
     points:[
       "what the place where you live is like",
@@ -247,7 +248,7 @@ function AudioPlayer({ src }) {
     <div>
       <audio ref={ref} src={src} onTimeUpdate={()=>setCt(ref.current?.currentTime||0)} onLoadedMetadata={()=>setDur(ref.current?.duration||0)} onEnded={()=>setPlaying(false)} />
       <div style={{ display:"flex", alignItems:"center", gap:14 }}>
-        <button onClick={toggle} style={{ cursor:"pointer", width:44, height:44, borderRadius:"50%", background:"#34D39920", border:"1.5px solid #34D39950", color:"#34D399", fontSize:"1rem", display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0, fontFamily:"inherit", transition:"all .14s" }}>{playing?"⏸":"▶"}</button>
+        <button onClick={toggle} style={{ cursor:"pointer", width:44, height:44, borderRadius:"50%", background:"#34D39920", border:"1.5px solid #34D39950", color:"#34D399", fontSize:"1rem", display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0, fontFamily:"inherit", transition:"all .14s" }}>{playing ? <Pause size={18} /> : <Play size={18} />}</button>
         <div style={{ flex:1 }}>
           <input type="range" className="ar" min="0" max={dur||1} step=".05" value={ct}
             onChange={e=>{if(ref.current)ref.current.currentTime=+e.target.value;setCt(+e.target.value);}}
@@ -259,13 +260,12 @@ function AudioPlayer({ src }) {
   );
 }
 
-const SunIcon = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>;
-const MoonIcon = () => <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>;
+
 
 function LevelNavigation({ onBack, onHome, T }) {
   return (
-    <div style={{width:"100%",maxWidth:520,padding:"16px 20px 0",display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:8}}>
-      <button className="lnk" onClick={onBack} style={{color:T.text2,fontSize:".83rem",fontWeight:600}}>← Back</button>
+    <div style={{width:"100%",maxWidth:680,padding:"16px 20px 0",display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:8}}>
+      <button className="lnk" onClick={onBack} style={{color:T.text2,fontSize:".83rem",fontWeight:600}}><ArrowLeft size={16} /> Back</button>
       <button
         type="button"
         onClick={onHome}
@@ -303,7 +303,7 @@ function SettingsPopup({ customTheme, onApply, onReset, onClose, T }) {
         {/* Header */}
         <div style={{ padding:"16px 20px", borderBottom:`1px solid ${T.border}`, display:"flex", justifyContent:"space-between", alignItems:"center" }}>
           <span style={{ fontWeight:700, fontSize:".95rem", color:T.text }}>Appearance</span>
-          <button onClick={onClose} style={{ cursor:"pointer", background:"none", border:"none", color:T.text2, fontSize:"1.2rem", lineHeight:1, padding:"2px 8px", borderRadius:6, fontFamily:"inherit" }}>✕</button>
+          <button onClick={onClose} style={{ cursor:"pointer", background:"none", border:"none", color:T.text2, lineHeight:1, padding:"2px 8px", borderRadius:6, fontFamily:"inherit", display:"flex", alignItems:"center" }}><X size={18} /></button>
         </div>
 
         {/* Theme tabs */}
@@ -316,7 +316,7 @@ function SettingsPopup({ customTheme, onApply, onReset, onClose, T }) {
               color: tab===t ? acc : T.text2,
               outline: tab===t ? `1.5px solid ${acc}50` : "none",
             }}>
-              {t==="dark" ? "🌙 Dark" : "☀️ Light"}
+              {t==="dark" ? <span style={{display:"inline-flex",alignItems:"center",gap:6}}><Moon size={14} /> Dark</span> : <span style={{display:"inline-flex",alignItems:"center",gap:6}}><Sun size={14} /> Light</span>}
             </button>
           ))}
         </div>
@@ -337,7 +337,7 @@ function SettingsPopup({ customTheme, onApply, onReset, onClose, T }) {
                     boxShadow: on ? `0 0 0 2px ${acc}40` : "0 1px 4px rgba(0,0,0,.2)",
                     transition:"all .15s",
                   }}>
-                    {on && <span style={{ color:acc, fontWeight:900, fontSize:".9rem" }}>✓</span>}
+                    {on && <span style={{ color:acc, display:"flex", alignItems:"center", justifyContent:"center", height:"100%" }}><Check size={18} strokeWidth={3} /></span>}
                   </button>
                   <p style={{ fontSize:".62rem", color:T.text4, marginTop:5 }}>{opt.label}</p>
                 </div>
@@ -439,7 +439,7 @@ function Level1Match({ card, T, onBack, onComplete }) {
 
   const reset = () => { setPlace({}); setSel(null); setChecked(false); setScore(0); setShowCorrect(false); };
 
-  const WRAP={width:"100%",maxWidth:520,padding:"16px 20px 52px"};
+  const WRAP={width:"100%",maxWidth:680,padding:"16px 20px 52px"};
 
   return (
     <div className="fade-up" style={WRAP}>
@@ -520,7 +520,7 @@ function Level2Reconstruct({ card, T, onBack, onComplete }) {
   const [checked, setChecked]       = useState(false);
   const [showMono, setShowMono]     = useState(false);
 
-  const WRAP={width:"100%",maxWidth:520,padding:"16px 20px 52px"};
+  const WRAP={width:"100%",maxWidth:680,padding:"16px 20px 52px"};
   const labels=["Introduction","Point 1","Point 2","Point 3","Point 4","Conclusion"];
   const allParts=[card.monologue.intro,...card.monologue.paragraphs,card.monologue.outro];
 
@@ -601,6 +601,7 @@ function Level3Speak({ card, T, pointIdx, onBack, onComplete, onNewPoint }) {
   const [noMic, setNoMic]   = useState(false);
   const [trig, setTrig]     = useState(null);
   const mrRef=useRef(null),chunksRef=useRef([]),timerRef=useRef(null),mimeRef=useRef("audio/webm");
+  const CardIcon = card.icon;
 
   const doRecord = useCallback(async () => {
     clearInterval(timerRef.current); setNoMic(false);
@@ -631,11 +632,11 @@ function Level3Speak({ card, T, pointIdx, onBack, onComplete, onNewPoint }) {
     setLeft(seconds);
   };
 
-  const WRAP={width:"100%",maxWidth:520,padding:"16px 20px 52px",display:"flex",flexDirection:"column",alignItems:"center"};
+  const WRAP={width:"100%",maxWidth:680,padding:"16px 20px 52px",display:"flex",flexDirection:"column",alignItems:"center"};
 
   if (phase==="prep") return (
     <div className="fade-up" style={WRAP}>
-      <div className="chip" style={{background:card.bg,borderColor:card.color+"40",color:card.color,fontSize:".8rem",fontWeight:700,marginBottom:24,cursor:"default"}}>{card.emoji} {card.category}</div>
+      <div className="chip" style={{background:card.bg,borderColor:card.color+"40",color:card.color,fontSize:".8rem",fontWeight:700,marginBottom:24,cursor:"default",display:"inline-flex",alignItems:"center",gap:6}}><CardIcon size={15} strokeWidth={2.2} /> {card.category}</div>
       <h2 style={{fontSize:"1.4rem",fontWeight:800,textAlign:"center",marginBottom:6,color:T.text}}>Prepare your answer</h2>
       <p style={{fontSize:".87rem",color:T.text2,textAlign:"center",marginBottom:30}}>Recording starts automatically</p>
       <div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:9,marginBottom:22}}>
@@ -688,7 +689,7 @@ function Level3Speak({ card, T, pointIdx, onBack, onComplete, onNewPoint }) {
   return (
     <div className="fade-up" style={{...WRAP,alignItems:"stretch"}}>
       <div style={{textAlign:"center",paddingTop:16,paddingBottom:24}}>
-        <div style={{fontSize:"2.2rem",marginBottom:8}}>🎉</div>
+        <div style={{marginBottom:8,color:"#34D399"}}><PartyPopper size={40} strokeWidth={2} /></div>
         <h2 style={{fontSize:"1.6rem",fontWeight:800,color:T.text,marginBottom:4}}>Well done!</h2>
         <p style={{fontSize:".88rem",color:T.text2}}>{noMic?"Practice session complete":"Listen back and download your answer"}</p>
       </div>
@@ -697,7 +698,7 @@ function Level3Speak({ card, T, pointIdx, onBack, onComplete, onNewPoint }) {
         <p style={{fontSize:".95rem",color:T.dim,lineHeight:1.6}}>{card.points[pointIdx]}</p>
       </div>
       {!noMic && audioURL && <div className="card" style={{padding:"18px 18px",marginBottom:12,background:T.surface,borderColor:T.border}}><AudioPlayer src={audioURL}/></div>}
-      {!noMic && audioURL && <button className="act" onClick={download} style={{background:"#34D39916",border:"1.5px solid #34D39940",color:"#34D399",fontWeight:700,marginBottom:10}}>⬇ Download</button>}
+      {!noMic && audioURL && <button className="act" onClick={download} style={{background:"#34D39916",border:"1.5px solid #34D39940",color:"#34D399",fontWeight:700,marginBottom:10,display:"flex",alignItems:"center",justifyContent:"center",gap:8}}><Download size={18} /> Download</button>}
       <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:9}}>
         <button className="ghost" style={{background:T.ghostBg,borderColor:T.ghostBorder,color:T.ghostClr}} onClick={onNewPoint}>Another point</button>
         <button className="ghost" style={{background:T.ghostBg,borderColor:T.ghostBorder,color:T.ghostClr}} onClick={onBack}>New card</button>
@@ -724,7 +725,7 @@ function Level4Write({ card, T, onBack, onComplete }) {
     if(words>=60) onComplete(card.id);
   };
 
-  const WRAP={width:"100%",maxWidth:520,padding:"16px 20px 52px"};
+  const WRAP={width:"100%",maxWidth:680,padding:"16px 20px 52px"};
 
   return (
     <div className="fade-up" style={WRAP}>
@@ -773,8 +774,8 @@ function Level4Write({ card, T, onBack, onComplete }) {
         {revealed===0?"Show model intro →":`Show next section (${revealed}/5)`}
       </button>}
 
-      <button className="act" onClick={handleSave} style={{background:"linear-gradient(135deg,#4ADE80,#22C55E)",color:"#fff"}}>
-        {saved?"✓ Saved":"⬇ Save as .txt"}
+      <button className="act" onClick={handleSave} style={{background:"linear-gradient(135deg,#4ADE80,#22C55E)",color:"#fff",display:"flex",alignItems:"center",justifyContent:"center",gap:8}}>
+        {saved ? <><Check size={18} strokeWidth={3} /> Saved</> : <><Download size={18} /> Save as .txt</>}
       </button>
     </div>
   );
@@ -815,7 +816,7 @@ function Level5Exam({ card, T, onBack, onComplete }) {
 
   const download=()=>{if(!audioURL)return;const a=document.createElement("a");a.href=audioURL;a.download=`exam_${card.id}_${Date.now()}.${mimeRef.current.includes("mp4")?"mp4":"webm"}`;document.body.appendChild(a);a.click();document.body.removeChild(a);};
 
-  const WRAP={width:"100%",maxWidth:520,padding:"16px 20px 52px"};
+  const WRAP={width:"100%",maxWidth:680,padding:"16px 20px 52px"};
   const CTR={...WRAP,display:"flex",flexDirection:"column",alignItems:"center",paddingTop:28};
 
   // Exam task card (styled like real OGE card)
@@ -867,12 +868,12 @@ function Level5Exam({ card, T, onBack, onComplete }) {
   return (
     <div className="fade-up" style={WRAP}>
       <div style={{textAlign:"center",paddingTop:16,paddingBottom:24}}>
-        <div style={{fontSize:"2.4rem",marginBottom:10}}>{noMic?"👍":"🎉"}</div>
+        <div style={{marginBottom:10,color:noMic?"#818CF8":"#34D399"}}>{noMic?<ThumbsUp size={42} strokeWidth={2} />:<PartyPopper size={42} strokeWidth={2} />}</div>
         <h2 style={{fontSize:"1.7rem",fontWeight:800,color:T.text,marginBottom:4}}>Well done!</h2>
         <p style={{fontSize:".88rem",color:T.text2}}>{noMic?"Practice complete":"Listen back and compare with the model"}</p>
       </div>
       {!noMic&&audioURL&&<div className="card" style={{padding:"18px 18px",marginBottom:12,background:T.surface,borderColor:T.border}}><p style={{fontSize:".63rem",fontWeight:700,letterSpacing:".1em",color:T.label,textTransform:"uppercase",marginBottom:12}}>Your recording</p><AudioPlayer src={audioURL}/></div>}
-      {!noMic&&audioURL&&<button className="act" onClick={download} style={{background:"#34D39916",border:"1.5px solid #34D39940",color:"#34D399",fontWeight:700,marginBottom:12}}>⬇ Download recording</button>}
+      {!noMic&&audioURL&&<button className="act" onClick={download} style={{background:"#34D39916",border:"1.5px solid #34D39940",color:"#34D399",fontWeight:700,marginBottom:12,display:"flex",alignItems:"center",justifyContent:"center",gap:8}}><Download size={18} /> Download recording</button>}
 
       {/* Model monologue reveal */}
       <button className="ghost" onClick={()=>setModel(v=>!v)} style={{background:T.ghostBg,borderColor:T.ghostBorder,color:T.ghostClr,marginBottom:showModel?16:0}}>
@@ -978,15 +979,15 @@ export default function App() {
         {/* Header */}
         <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:32}}>
           <div style={{display:"flex",alignItems:"center",gap:10}}>
-            <div style={{width:38,height:38,borderRadius:12,background:"#C4B5F4",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"1.1rem"}}>🎤</div>
+            <div style={{width:38,height:38,borderRadius:12,background:"#C4B5F4",display:"flex",alignItems:"center",justifyContent:"center",color:"#1A2E4A"}}><Mic size={20} strokeWidth={2.2} /></div>
             <div>
               <p style={{fontWeight:800,fontSize:"1.05rem",color:T.text,letterSpacing:"-.02em"}}>Monologue</p>
               <p style={{fontSize:".65rem",color:T.text2,whiteSpace:"nowrap"}}>OGE Task 3 · 5 cards · 5 levels</p>
             </div>
           </div>
           <div style={{ display:"flex", alignItems:"center", gap:7 }}>
-            <button className="theme-btn" onClick={toggleFullscreen} title={isFullscreen ? "Exit fullscreen" : "Fullscreen"}>{isFullscreen ? "⤫" : "⛶"}</button>
-            <button className="theme-btn" onClick={()=>setDark(d=>!d)} title={dark ? "Switch to light" : "Switch to dark"}>{dark ? "☀" : "☾"}</button>
+            <button className="theme-btn" onClick={toggleFullscreen} title={isFullscreen ? "Exit fullscreen" : "Fullscreen"}>{isFullscreen ? <Minimize size={16} /> : <Expand size={16} />}</button>
+            <button className="theme-btn" onClick={()=>setDark(d=>!d)} title={dark ? "Switch to light" : "Switch to dark"}>{dark ? <Sun size={16} /> : <Moon size={15} />}</button>
           </div>
         </div>
 
@@ -994,10 +995,11 @@ export default function App() {
         <div style={{display:"flex",flexDirection:"column",gap:12}}>
           {LEVELS.map(lv=>{
             const done=(progress[`l${lv.id}`]||[]).length;
+            const Icon = lv.icon;
             return (
-            <div key={lv.id} style={{borderRadius:16,border:`1px solid ${lv.color}55`,background:dark ? lv.darkBg : lv.bg,padding:"18px 18px",cursor:"pointer",boxShadow:dark ? "none" : "0 8px 32px -18px rgba(26,46,74,.18)"}} onClick={()=>{setSelLevel(lv.id);setScreen("topicSelect");}}>
+            <div key={lv.id} style={{borderRadius:16,background:T.surface,border:`1px solid ${T.border}`,borderLeft:`4px solid ${lv.color}`,padding:"18px 18px",cursor:"pointer",boxShadow:dark?"none":"0 8px 32px -18px rgba(26,46,74,.18)",transition:"transform .15s,box-shadow .15s"}} onClick={()=>{setSelLevel(lv.id);setScreen("topicSelect");}}>
                 <div style={{display:"flex",alignItems:"center",gap:14}}>
-                  <div style={{width:40,height:40,borderRadius:12,background:lv.color+"25",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"1.2rem",flexShrink:0}}>{lv.icon}</div>
+                  <div style={{width:44,height:44,borderRadius:12,background:lv.color+"22",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,color:lv.color}}><Icon size={22} strokeWidth={2.2} /></div>
                   <div style={{flex:1,minWidth:0}}>
                     <div style={{display:"flex",alignItems:"center",gap:6,marginBottom:3}}>
                       <span style={{fontSize:".65rem",fontWeight:700,color:lv.color,letterSpacing:".06em",textTransform:"uppercase",whiteSpace:"nowrap"}}>Level {lv.id}</span>
@@ -1021,33 +1023,35 @@ export default function App() {
   // ── Topic Select ──────────────────────────────────────────────────────────
   if (screen==="topicSelect") {
     const lv=LEVELS.find(l=>l.id===selLevel);
+    const Icon = lv.icon;
     return (
       <div key="topics" className="app-scroll fade-up" style={APP}>
         <div style={WRAP}>
           <div style={{display:"flex",alignItems:"center",marginBottom:28}}>
-            <button className="lnk" onClick={()=>setScreen("home")} style={{color:T.text2,fontSize:".83rem",fontWeight:600}}>← Home</button>
-            <div style={{marginLeft:"auto",padding:"4px 12px",borderRadius:20,background:lv.bg,border:`1px solid ${lv.color}30`,color:lv.color,fontSize:".78rem",fontWeight:700}}>{lv.icon} Level {lv.id} · {lv.name}</div>
+            <button className="lnk" onClick={()=>setScreen("home")} style={{color:T.text2,fontSize:".83rem",fontWeight:600}}><ArrowLeft size={16} /> Home</button>
+            <div style={{marginLeft:"auto",padding:"4px 12px",borderRadius:20,background:lv.bg,border:`1px solid ${lv.color}30`,color:lv.color,fontSize:".78rem",fontWeight:700,display:"inline-flex",alignItems:"center",gap:6}}><Icon size={14} strokeWidth={2.2} /> Level {lv.id} · {lv.name}</div>
           </div>
           <h2 style={{fontSize:"1.4rem",fontWeight:800,letterSpacing:"-.02em",marginBottom:6,color:T.text}}>Choose a card</h2>
           <p style={{color:T.text2,fontSize:".9rem",marginBottom:24}}>{selLevel===3?"A random point from the card will be selected.":"Pick any card to practice."}</p>
 
           {/* Random button */}
           <button onClick={()=>goToCard(TASK_CARDS[Math.floor(Math.random()*TASK_CARDS.length)])}
-            style={{width:"100%",marginBottom:12,padding:"14px",borderRadius:14,border:`2px dashed ${lv.color}60`,background:lv.bg,color:lv.color,fontFamily:"inherit",fontSize:".9rem",fontWeight:700,cursor:"pointer",transition:"opacity .15s"}}
-          >🎲 Random card</button>
+            style={{width:"100%",marginBottom:12,padding:"14px",borderRadius:14,border:`2px dashed ${lv.color}60`,background:lv.bg,color:lv.color,fontFamily:"inherit",fontSize:".9rem",fontWeight:700,cursor:"pointer",transition:"opacity .15s",display:"flex",alignItems:"center",justifyContent:"center",gap:8}}
+          ><Shuffle size={18} strokeWidth={2.2} /> Random card</button>
 
           {/* Card grid */}
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>
             {TASK_CARDS.map(card=>{
               const done=(progress[`l${selLevel}`]||[]).includes(card.id);
+              const CardIcon = card.icon;
               return (
                 <div key={card.id} className="tc" onClick={()=>goToCard(card)}
-                  style={{background:card.bg,borderColor:card.color+"28",position:"relative"}}>
-                  {done && <span style={{position:"absolute",top:8,right:8,fontSize:".65rem",fontWeight:700,color:"#34D399"}}>✓</span>}
-                  <span style={{fontSize:"1.4rem",flexShrink:0}}>{card.emoji}</span>
+                  style={{background:T.surface,borderColor:T.border,position:"relative",boxShadow:"0 4px 14px -6px rgba(26,46,74,.10)"}}>
+                  {done && <span style={{position:"absolute",top:10,right:10,color:"#34D399"}}><Check size={16} strokeWidth={3} /></span>}
+                  <span style={{width:40,height:40,borderRadius:10,background:card.color+"22",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,color:card.color}}><CardIcon size={20} strokeWidth={2.2} /></span>
                   <div>
-                    <div style={{fontWeight:700,fontSize:".88rem",color:card.color}}>{card.category}</div>
-                    <div style={{fontSize:".7rem",color:card.color+"60",marginTop:2}}>{done?"practiced":""}</div>
+                    <div style={{fontWeight:700,fontSize:".88rem",color:T.text}}>{card.category}</div>
+                    <div style={{fontSize:".7rem",color:done?"#34D399":T.text4,marginTop:2}}>{done?"practiced":"tap to start"}</div>
                   </div>
                 </div>
               );
