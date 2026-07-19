@@ -264,7 +264,7 @@ function AudioPlayer({ src }) {
 
 function LevelNavigation({ onBack, onHome, T }) {
   return (
-    <div style={{width:"100%",maxWidth:680,padding:"16px 20px 0",display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:8}}>
+    <div style={{position:"sticky",top:0,zIndex:20,width:"100%",maxWidth:680,padding:"16px 20px 8px",display:"flex",alignItems:"center",justifyContent:"space-between",background:T.bg,flexShrink:0}}>
       <button className="lnk" onClick={onBack} style={{color:T.text2,fontSize:".83rem",fontWeight:600}}><ArrowLeft size={16} /> Back</button>
       <button
         type="button"
@@ -726,14 +726,16 @@ function Level4Write({ card, T, onBack, onComplete }) {
   };
 
   const WRAP={width:"100%",maxWidth:680,padding:"16px 20px 52px"};
+  const taskText="#1A2E4A";
+  const taskTextMuted="rgba(26,46,74,.78)";
 
   return (
     <div className="fade-up" style={WRAP}>
       {/* Task card */}
       <div style={{marginBottom:20,padding:"16px 18px",borderRadius:16,border:`2px solid ${card.color}50`,background:card.bg}}>
-        <p style={{fontSize:".7rem",fontWeight:700,color:card.color,letterSpacing:".08em",textTransform:"uppercase",marginBottom:8}}>Task 3 — give a talk about {card.taskTopic}</p>
-        <p style={{fontSize:".83rem",color:T.text,marginBottom:8}}>You will have to start in 1.5 minutes and speak for not more than 2 minutes (10–12 sentences). Remember to say:</p>
-        {card.points.map((p,i)=><p key={i} style={{fontSize:".88rem",color:T.text,marginBottom:4}}>• {p}</p>)}
+        <p style={{fontSize:".7rem",fontWeight:700,color:taskText,letterSpacing:".08em",textTransform:"uppercase",marginBottom:8}}>Task 3 — give a talk about {card.taskTopic}</p>
+        <p style={{fontSize:".83rem",color:taskTextMuted,marginBottom:8}}>You will have to start in 1.5 minutes and speak for not more than 2 minutes (10–12 sentences). Remember to say:</p>
+        {card.points.map((p,i)=><p key={i} style={{fontSize:".88rem",color:taskTextMuted,marginBottom:4}}>• {p}</p>)}
       </div>
 
       {/* Structure hint */}
@@ -1026,10 +1028,10 @@ export default function App() {
     const Icon = lv.icon;
     return (
       <div key="topics" className="app-scroll fade-up" style={APP}>
+        <LevelNavigation onBack={returnToLevelSelection} onHome={returnToLevelSelection} T={T} />
         <div style={WRAP}>
-          <div style={{display:"flex",alignItems:"center",marginBottom:28}}>
-            <button className="lnk" onClick={()=>setScreen("home")} style={{color:T.text2,fontSize:".83rem",fontWeight:600}}><ArrowLeft size={16} /> Home</button>
-            <div style={{marginLeft:"auto",padding:"4px 12px",borderRadius:20,background:dark ? lv.darkBg : lv.bg,border:`1px solid ${lv.color}${dark ? "90" : "30"}`,color:dark ? T.text : lv.color,fontSize:".78rem",fontWeight:700,display:"inline-flex",alignItems:"center",gap:6}}><Icon size={14} strokeWidth={2.2} /> Level {lv.id} · {lv.name}</div>
+          <div style={{display:"flex",justifyContent:"flex-end",marginBottom:20}}>
+            <div style={{padding:"4px 12px",borderRadius:20,background:dark ? lv.darkBg : lv.bg,border:`1px solid ${lv.color}${dark ? "90" : "30"}`,color:dark ? T.text : lv.color,fontSize:".78rem",fontWeight:700,display:"inline-flex",alignItems:"center",gap:6}}><Icon size={14} strokeWidth={2.2} /> Level {lv.id} · {lv.name}</div>
           </div>
           <h2 style={{fontSize:"1.4rem",fontWeight:800,letterSpacing:"-.02em",marginBottom:6,color:T.text}}>Choose a card</h2>
           <p style={{color:T.text2,fontSize:".9rem",marginBottom:24}}>{selLevel===3?"A random point from the card will be selected.":"Pick any card to practice."}</p>
