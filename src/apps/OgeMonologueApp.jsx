@@ -949,7 +949,7 @@ export default function App() {
   useEffect(()=>{applyTheme(T);},[dark]);
 
   const APP={position:"fixed",inset:0,overflowY:"auto",background:T.bg,fontFamily:"'Plus Jakarta Sans', sans-serif",color:T.text,display:"flex",flexDirection:"column",alignItems:"center"};
-  const WRAP={width:"100%",maxWidth:680,padding:"30px 24px 56px"};
+  const WRAP={width:"100%",maxWidth:680,padding:"clamp(24px, 4vh, 40px) 24px",marginBlock:"auto",flexShrink:0};
 
   const toggleFullscreen = () => {
     if (document.fullscreenElement) {
@@ -1029,14 +1029,14 @@ export default function App() {
         <div style={WRAP}>
           <div style={{display:"flex",alignItems:"center",marginBottom:28}}>
             <button className="lnk" onClick={()=>setScreen("home")} style={{color:T.text2,fontSize:".83rem",fontWeight:600}}><ArrowLeft size={16} /> Home</button>
-            <div style={{marginLeft:"auto",padding:"4px 12px",borderRadius:20,background:lv.bg,border:`1px solid ${lv.color}30`,color:lv.color,fontSize:".78rem",fontWeight:700,display:"inline-flex",alignItems:"center",gap:6}}><Icon size={14} strokeWidth={2.2} /> Level {lv.id} · {lv.name}</div>
+            <div style={{marginLeft:"auto",padding:"4px 12px",borderRadius:20,background:dark ? lv.darkBg : lv.bg,border:`1px solid ${lv.color}${dark ? "90" : "30"}`,color:dark ? T.text : lv.color,fontSize:".78rem",fontWeight:700,display:"inline-flex",alignItems:"center",gap:6}}><Icon size={14} strokeWidth={2.2} /> Level {lv.id} · {lv.name}</div>
           </div>
           <h2 style={{fontSize:"1.4rem",fontWeight:800,letterSpacing:"-.02em",marginBottom:6,color:T.text}}>Choose a card</h2>
           <p style={{color:T.text2,fontSize:".9rem",marginBottom:24}}>{selLevel===3?"A random point from the card will be selected.":"Pick any card to practice."}</p>
 
           {/* Random button */}
           <button onClick={()=>goToCard(TASK_CARDS[Math.floor(Math.random()*TASK_CARDS.length)])}
-            style={{width:"100%",marginBottom:12,padding:"14px",borderRadius:14,border:`2px dashed ${lv.color}60`,background:lv.bg,color:lv.color,fontFamily:"inherit",fontSize:".9rem",fontWeight:700,cursor:"pointer",transition:"opacity .15s",display:"flex",alignItems:"center",justifyContent:"center",gap:8}}
+            style={{width:"100%",marginBottom:12,padding:"14px",borderRadius:14,border:`2px dashed ${lv.color}${dark ? "CC" : "60"}`,background:dark ? lv.darkBg : lv.bg,color:dark ? T.text : lv.color,fontFamily:"inherit",fontSize:".9rem",fontWeight:700,cursor:"pointer",transition:"opacity .15s",display:"flex",alignItems:"center",justifyContent:"center",gap:8}}
           ><Shuffle size={18} strokeWidth={2.2} /> Random card</button>
 
           {/* Card grid */}
