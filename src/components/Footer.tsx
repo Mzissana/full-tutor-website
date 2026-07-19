@@ -1,13 +1,12 @@
 import { Send } from 'lucide-react';
 import { SITE, NAV_LINKS } from '../config';
-import type { PageKey } from '../config';
+import { navigateFromLink, routeHref } from '../navigation';
 import { useRouter } from '../router';
 import { VkButton } from './TelegramButton';
 import { SiteLogo } from './SiteLogo';
 
 export function Footer() {
   const { navigate } = useRouter();
-  const goPage = (p: PageKey, h?: string) => navigate(p, h);
 
   return (
     <footer className="min-w-[320px] bg-navy text-white">
@@ -30,21 +29,23 @@ export function Footer() {
             <ul className="mt-4 space-y-2.5">
               {NAV_LINKS.map((link) => (
                 <li key={link.label}>
-                  <button
-                    onClick={() => goPage(link.page, link.hash)}
-                  className="text-sm text-white/70 transition-colors hover:text-butter"
+                  <a
+                    href={routeHref(link.page, link.hash)}
+                    onClick={(event) => navigateFromLink(event, navigate, link.page, link.hash)}
+                    className="text-sm text-white/70 transition-colors hover:text-butter"
                   >
                     {link.label}
-                  </button>
+                  </a>
                 </li>
               ))}
               <li>
-                <button
-                  onClick={() => goPage('privacy')}
-                className="text-sm leading-snug text-white/70 transition-colors hover:text-butter"
+                <a
+                  href={routeHref('privacy')}
+                  onClick={(event) => navigateFromLink(event, navigate, 'privacy')}
+                  className="text-sm leading-snug text-white/70 transition-colors hover:text-butter"
                 >
                   Политика конфиденциальности
-                </button>
+                </a>
               </li>
             </ul>
           </div>

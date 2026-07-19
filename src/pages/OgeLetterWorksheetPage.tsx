@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowLeft, Download, FileText, Home, Maximize2, Moon, Sun } from 'lucide-react';
+import { navigateFromLink, routeHref } from '../navigation';
 import { useRouter } from '../router';
 
 const WORKSHEET_SOURCE = '/worksheets/oge-electronic-letter/index.html';
@@ -50,13 +51,13 @@ export function OgeLetterWorksheetPage() {
         <div className="container-px">
           <section ref={appRef} className={`overflow-hidden rounded-[2rem] p-3 shadow-float ring-1 transition-colors sm:p-7 ${shellClass}`}>
             <div className="flex items-center justify-between gap-3 px-2 sm:px-0">
-              <button type="button" onClick={() => navigate('materials')} className={`inline-flex items-center gap-1.5 rounded-full px-2 py-2 text-sm font-bold transition-colors sm:px-3 ${dark ? 'text-slate-300 hover:text-white' : 'text-navy/70 hover:text-navy'}`}>
+              <a href={routeHref('materials')} onClick={(event) => navigateFromLink(event, navigate, 'materials')} className={`inline-flex items-center gap-1.5 rounded-full px-2 py-2 text-sm font-bold transition-colors sm:px-3 ${dark ? 'text-slate-300 hover:text-white' : 'text-navy/70 hover:text-navy'}`}>
                 <ArrowLeft className="h-4 w-4" />Назад
-              </button>
+              </a>
               <div className="flex items-center gap-2">
-                <button type="button" onClick={() => navigate('materials')} className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-2 text-sm font-bold shadow-soft transition-colors ${controlClass}`} aria-label="Вернуться к материалам">
+                <a href={routeHref('materials')} onClick={(event) => navigateFromLink(event, navigate, 'materials')} className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-2 text-sm font-bold shadow-soft transition-colors ${controlClass}`} aria-label="Вернуться к материалам">
                   <Home className="h-4 w-4" /><span className="hidden sm:inline">Главная</span>
-                </button>
+                </a>
                 <button type="button" onClick={() => setDark((value) => !value)} className={`inline-flex h-9 w-9 items-center justify-center rounded-xl border shadow-soft transition-colors ${controlClass}`} aria-label={dark ? 'Включить светлую тему' : 'Включить тёмную тему'}>
                   {dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
                 </button>

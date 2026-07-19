@@ -38,7 +38,7 @@ export function Reveal({ children, className = '', delay = 0, as = 'div', once =
   return (
     <Tag
       ref={ref as React.RefObject<HTMLDivElement>}
-      className={`${visible ? 'animate-fadeUp' : 'opacity-0'} ${className}`}
+      className={`${visible ? 'animate-fadeUp' : 'reveal-pending'} ${className}`}
       style={{ animationDelay: visible ? `${delay}ms` : undefined }}
     >
       {children}

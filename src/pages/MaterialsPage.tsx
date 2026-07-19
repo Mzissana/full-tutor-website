@@ -14,6 +14,7 @@ import { Reveal } from '../components/Reveal';
 import { SectionHeading } from '../components/SectionHeading';
 import { MATERIALS } from '../config';
 import type { Material, MaterialCategory } from '../config';
+import { navigateFromLink, routeHref } from '../navigation';
 import { useRouter } from '../router';
 
 const FILTERS: (MaterialCategory | 'Все материалы')[] = [
@@ -205,9 +206,13 @@ export function MaterialsPage() {
                 title="Хотите узнать о новых материалах?"
                 description="Напишите в Telegram — пришлю уведомление, когда появятся новые рабочие листы и задания"
               />
-              <button onClick={() => navigate('contacts')} className="btn-ghost mt-2">
+              <a
+                href={routeHref('contacts')}
+                onClick={(event) => navigateFromLink(event, navigate, 'contacts')}
+                className="btn-ghost mt-2"
+              >
                 Перейти в контакты
-              </button>
+              </a>
             </div>
           </Reveal>
         </div>

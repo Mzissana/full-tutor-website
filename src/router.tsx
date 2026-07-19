@@ -2,6 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState } 
 import type { ReactNode } from 'react';
 import { NAV_LINKS } from './config';
 import type { PageKey } from './config';
+import { pageFromPathname, routeHref } from './navigation';
 
 interface RouterContextValue {
   page: PageKey;
@@ -11,45 +12,15 @@ interface RouterContextValue {
 
 const RouterContext = createContext<RouterContextValue | null>(null);
 
-function parseLocation(): { page: PageKey; hash: string } {
-  const pathname = window.location.pathname.replace(/\/$/, '') || '/';
-  const page = (
-    pathname === '/extra/examind'
-      ? 'examind'
-      : pathname === '/extra/oge-monologue'
-        ? 'ogeMonologue'
-      : pathname === '/extra/speaking-practice'
-        ? 'speakPractice'
-      : pathname === '/extra/oge-electronic-letter'
-        ? 'ogeElectronicLetter'
-      : pathname === '/extra'
-      ? 'materials'
-      : pathname === '/contacts'
-        ? 'contacts'
-        : pathname === '/privacy'
-          ? 'privacy'
-          : 'home'
-  ) as PageKey;
-  const hash = window.location.hash.replace(/^#/, '');
-  return { page, hash };
+function parseLocation(initialUrl?: string): { page: PageKey; hash: string } {
+  const location = initialUrl ?? `${window.location.pathname}${window.location.search}${window.location.hash}`;
+  const [pathAndQuery, hash = ''] = location.split('#', 2);
+  const pathname = pathAndQuery.split('?', 1)[0];
+  return { page: pageFromPathname(pathname), hash };
 }
 
-function locationString(page: PageKey, hash?: string): string {
-  const paths: Record<PageKey, string> = {
-    home: '/',
-    materials: '/extra',
-    examind: '/extra/examind',
-    ogeMonologue: '/extra/oge-monologue',
-    speakPractice: '/extra/speaking-practice',
-    ogeElectronicLetter: '/extra/oge-electronic-letter',
-    contacts: '/contacts',
-    privacy: '/privacy',
-  };
-  return hash ? `${paths[page]}#${hash}` : paths[page];
-}
-
-export function RouterProvider({ children }: { children: ReactNode }) {
-  const [{ page, hash }, setState] = useState(parseLocation);
+export function RouterProvider({ children, initialUrl }: { children: ReactNode; initialUrl?: string }) {
+  const [{ page, hash }, setState] = useState(() => parseLocation(initialUrl));
 
   useEffect(() => {
     const onLocationChange = () => {
@@ -69,7 +40,7 @@ export function RouterProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const navigate = useCallback((toPage: PageKey, toHash?: string) => {
-    const target = locationString(toPage, toHash);
+    const target = routeHref(toPage, toHash);
     if (`${window.location.pathname}${window.location.hash}` === target) {
       // Same location: still handle scroll
       if (toHash) {

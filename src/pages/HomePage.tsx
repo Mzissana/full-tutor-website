@@ -30,6 +30,7 @@ import { TelegramButton, VkButton } from '../components/TelegramButton';
 import { SmartImage } from '../components/SmartImage';
 import { SITE, REVIEWS } from '../config';
 import { contactEndpoint } from '../contactEndpoint';
+import { navigateFromLink, routeHref } from '../navigation';
 import { useRouter } from '../router';
 
 /* ---------------- Hero ---------------- */
@@ -91,10 +92,14 @@ function Hero() {
             <div className="flex flex-wrap items-center gap-3 pt-2">
               <TelegramButton variant="blush">Записаться на занятие</TelegramButton>
               <VkButton variant="blush">Написать во ВКонтакте</VkButton>
-              <button onClick={() => navigate('home', 'directions')} className="btn-ghost">
+              <a
+                href={routeHref('home', 'directions')}
+                onClick={(event) => navigateFromLink(event, navigate, 'home', 'directions')}
+                className="btn-ghost"
+              >
                 Узнать о занятиях
                 <ArrowRight className="h-4 w-4" />
-              </button>
+              </a>
             </div>
           </Reveal>
         </div>

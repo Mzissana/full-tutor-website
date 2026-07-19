@@ -13,7 +13,7 @@ export function PrivacyPage() {
               <FileText className="h-4 w-4" />
               Документ
             </span>
-            <h1 className="font-display text-4xl font-extrabold leading-tight tracking-tight text-navy text-balance sm:text-5xl">
+            <h1 className="break-words font-display text-3xl font-extrabold leading-tight tracking-tight text-navy text-balance sm:text-5xl">
               Политика конфиденциальности
             </h1>
           </Reveal>

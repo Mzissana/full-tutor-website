@@ -11,23 +11,14 @@ import { ExamindPage } from './pages/ExamindPage';
 import { OgeMonologuePage } from './pages/OgeMonologuePage';
 import { SpeakPracticePage } from './pages/SpeakPracticePage';
 import { OgeLetterWorksheetPage } from './pages/OgeLetterWorksheetPage';
+import { applySeoMetadata } from './seo-client';
+import { getPageSeo } from './seo';
 
 function PageView() {
   const { page } = useRouter();
 
-  // Update document title per page
   useEffect(() => {
-    const titles: Record<string, string> = {
-      home: 'MzissanaEnglish — английский для школьников',
-      contacts: 'Контакты — MzissanaEnglish',
-      materials: 'Материалы — MzissanaEnglish',
-      examind: 'Ментальные карты для подготовки к ОГЭ — MzissanaEnglish',
-      ogeMonologue: 'Практика монологов ОГЭ — MzissanaEnglish',
-      speakPractice: 'Ответы на вопросы ОГЭ — MzissanaEnglish',
-      ogeElectronicLetter: 'Шаблон электронного письма ОГЭ — MzissanaEnglish',
-      privacy: 'Политика конфиденциальности — MzissanaEnglish',
-    };
-    document.title = titles[page] ?? titles.home;
+    applySeoMetadata(getPageSeo(page));
   }, [page]);
 
   switch (page) {
@@ -50,9 +41,9 @@ function PageView() {
   }
 }
 
-function App() {
+function App({ initialUrl }: { initialUrl?: string }) {
   return (
-    <RouterProvider>
+    <RouterProvider initialUrl={initialUrl}>
       <div className="flex min-h-screen flex-col">
         <Header />
         <div className="flex-1">

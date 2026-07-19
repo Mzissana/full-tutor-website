@@ -1,9 +1,28 @@
+ErrorDocument 404 /404.html
+
 RewriteEngine On
+
+# Redirect directly requested prerender files without affecting internal rewrites.
+RewriteCond %{THE_REQUEST} \s/+index\.html[?\s] [NC]
+RewriteRule ^index\.html$ / [R=301,L]
+RewriteCond %{THE_REQUEST} \s/+extra\.html[?\s] [NC]
+RewriteRule ^extra\.html$ /extra [R=301,L]
+RewriteCond %{THE_REQUEST} \s/+extra/(examind|oge-monologue|speaking-practice|oge-electronic-letter)\.html[?\s] [NC]
+RewriteRule ^extra/(examind|oge-monologue|speaking-practice|oge-electronic-letter)\.html$ /extra/$1 [R=301,L]
+RewriteCond %{THE_REQUEST} \s/+(contacts|privacy)\.html[?\s] [NC]
+RewriteRule ^(contacts|privacy)\.html$ /$1 [R=301,L]
+
+# Normalize alternate trailing-slash URLs to the canonical clean paths.
+RewriteRule ^extra/$ /extra [R=301,L]
+RewriteRule ^extra/(examind|oge-monologue|speaking-practice|oge-electronic-letter)/$ /extra/$1 [R=301,L]
+RewriteRule ^(contacts|privacy)/$ /$1 [R=301,L]
+
+# Serve build-time prerendered pages at their clean canonical URLs.
+RewriteRule ^extra/?$ extra.html [L]
+RewriteRule ^extra/(examind|oge-monologue|speaking-practice|oge-electronic-letter)/?$ extra/$1.html [L]
+RewriteRule ^(contacts|privacy)/?$ $1.html [L]
 
 # Keep real files and the separately deployed mini-apps reachable.
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
-
-# Let the React app render direct visits to /extra, /contacts, and /privacy.
-RewriteRule ^ index.html [L]

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { NAV_LINKS, SITE } from '../config';
+import { navigateFromLink, routeHref } from '../navigation';
 import { useRouter } from '../router';
 import { TelegramButton, VkButton } from './TelegramButton';
 import { SiteLogo } from './SiteLogo';
@@ -24,9 +25,12 @@ export function Header() {
 
   useEffect(() => { setOpen(false); }, [page, hash]);
 
-  const go = (targetPage: typeof NAV_LINKS[number]['page'], targetHash?: string) => {
-    setOpen(false);
-    navigate(targetPage, targetHash);
+  const go = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    targetPage: typeof NAV_LINKS[number]['page'],
+    targetHash?: string,
+  ) => {
+    if (navigateFromLink(event, navigate, targetPage, targetHash)) setOpen(false);
   };
 
   const isActive = (label: string) => {
@@ -45,23 +49,27 @@ export function Header() {
     >
       <div className="mx-auto flex h-16 w-full max-w-[1440px] items-center justify-between gap-4 px-5 sm:h-20 sm:px-8 lg:px-10">
         {/* Logo */}
-        <button
-          onClick={() => go('home')}
+        <a
+          href={routeHref('home')}
+          onClick={(event) => go(event, 'home')}
           className="group flex shrink-0 items-center gap-2.5 text-left"
           aria-label="На главную"
+          aria-current={page === 'home' && !hash ? 'page' : undefined}
         >
           <SiteLogo className="transition-transform duration-300 group-hover:scale-105" />
           <span className="whitespace-nowrap font-display text-base font-bold tracking-tight text-navy sm:text-xl">
             {SITE.name}
           </span>
-        </button>
+        </a>
 
         {/* Desktop nav */}
         <nav className="hidden shrink-0 items-center gap-1 2xl:flex">
           {NAV_LINKS.map((link) => (
-            <button
+            <a
               key={link.label}
-              onClick={() => go(link.page, link.hash)}
+              href={routeHref(link.page, link.hash)}
+              onClick={(event) => go(event, link.page, link.hash)}
+              aria-current={isActive(link.label) ? (link.hash ? 'location' : 'page') : undefined}
               className={`relative whitespace-nowrap rounded-full px-3.5 py-2 text-sm font-bold transition-colors duration-200 ${
                 isActive(link.label) ? 'text-navy' : 'text-navy/55 hover:text-navy'
               }`}
@@ -70,7 +78,7 @@ export function Header() {
               {isActive(link.label) && (
                 <span className="absolute inset-x-3 -bottom-0.5 h-1 rounded-full bg-blush" />
               )}
-            </button>
+            </a>
           ))}
         </nav>
 
@@ -88,6 +96,7 @@ export function Header() {
           className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border-2 border-navy/10 bg-white/60 text-navy transition-colors hover:bg-white 2xl:hidden"
           aria-label={open ? 'Закрыть меню' : 'Открыть меню'}
           aria-expanded={open}
+          aria-controls="primary-mobile-navigation"
         >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
@@ -99,17 +108,19 @@ export function Header() {
           open ? 'max-h-[80vh] opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
-        <nav className="container-px flex flex-col gap-1 py-4">
+        <nav id="primary-mobile-navigation" className="container-px flex flex-col gap-1 py-4">
           {NAV_LINKS.map((link) => (
-            <button
+            <a
               key={link.label}
-              onClick={() => go(link.page, link.hash)}
+              href={routeHref(link.page, link.hash)}
+              onClick={(event) => go(event, link.page, link.hash)}
+              aria-current={isActive(link.label) ? (link.hash ? 'location' : 'page') : undefined}
               className={`rounded-xl px-4 py-3 text-left text-base font-bold transition-colors ${
                 isActive(link.label) ? 'bg-lavender/30 text-navy' : 'text-navy/60 hover:bg-lavender/15 hover:text-navy'
               }`}
             >
               {link.label}
-            </button>
+            </a>
           ))}
           <div className="mt-3 flex flex-col gap-2 min-[800px]:hidden">
             <TelegramButton variant="blush" className="w-full">
