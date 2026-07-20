@@ -11,6 +11,7 @@ import { ExamindPage } from './pages/ExamindPage';
 import { OgeMonologuePage } from './pages/OgeMonologuePage';
 import { SpeakPracticePage } from './pages/SpeakPracticePage';
 import { OgeLetterWorksheetPage } from './pages/OgeLetterWorksheetPage';
+import { OgeMonologueWorksheetPage } from './pages/OgeMonologueWorksheetPage';
 import { ServicePage } from './pages/ServicePage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { applyNotFoundSeo, applySeoMetadata } from './seo-client';
@@ -47,6 +48,8 @@ function PageView() {
       return <SpeakPracticePage />;
     case 'ogeElectronicLetter':
       return <OgeLetterWorksheetPage />;
+    case 'ogeMonologueWorksheet':
+      return <OgeMonologueWorksheetPage />;
     case 'privacy':
       return <PrivacyPage />;
     default:

@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from 'react';
+import type { AnchorHTMLAttributes, ButtonHTMLAttributes, MouseEventHandler, ReactNode } from 'react';
 import { Send } from 'lucide-react';
 import { SITE } from '../config';
 import { useRouter } from '../router';
+import { trackMetrikaGoal } from '../analytics';
 
 type Variant = 'butter' | 'navy' | 'blush' | 'ghost';
 
@@ -28,6 +29,10 @@ export function TelegramButton({
 }: TelegramButtonProps) {
   const href = SITE.telegram;
   const isPlaceholder = href === 'TELEGRAM_LINK';
+  const handleClick: MouseEventHandler<HTMLAnchorElement> = (event) => {
+    trackMetrikaGoal('telegram_click', { link_text: typeof children === 'string' ? children : 'Telegram' });
+    (onClick as unknown as MouseEventHandler<HTMLAnchorElement> | undefined)?.(event);
+  };
 
   if (isPlaceholder) {
     return (
@@ -49,7 +54,7 @@ export function TelegramButton({
       target="_blank"
       rel="noopener noreferrer"
       className={`${variantClasses[variant]} ${className}`}
-      onClick={onClick as unknown as React.MouseEventHandler<HTMLAnchorElement>}
+      onClick={handleClick}
     >
       <Send className="h-5 w-5" />
       {children}
@@ -83,7 +88,14 @@ export function TelegramFab() {
   }
 
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer" aria-label="Написать в Telegram" className={cls}>
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Написать в Telegram"
+      className={cls}
+      onClick={() => trackMetrikaGoal('telegram_click', { placement: 'mobile_floating_button' })}
+    >
       <Send className="absolute left-1/2 top-1/2 h-6 w-6 -translate-x-[48%] -translate-y-[43%]" />
     </a>
   );
@@ -99,14 +111,21 @@ export function VkButton({
   variant = 'blush',
   children = 'Написать во ВКонтакте',
   className = '',
+  onClick,
   ...rest
 }: VkButtonProps) {
+  const handleClick: MouseEventHandler<HTMLAnchorElement> = (event) => {
+    trackMetrikaGoal('vk_click', { link_text: typeof children === 'string' ? children : 'VK' });
+    onClick?.(event);
+  };
+
   return (
     <a
       href={SITE.vk}
       target="_blank"
       rel="noopener noreferrer"
       className={`${variantClasses[variant]} ${className}`}
+      onClick={handleClick}
       {...rest}
     >
       <span className="font-display text-xs font-extrabold leading-none">VK</span>

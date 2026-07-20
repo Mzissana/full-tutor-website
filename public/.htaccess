@@ -2,32 +2,42 @@ ErrorDocument 404 /404.html
 
 RewriteEngine On
 
-# Canonical host: HTTPS without www. Old domains can use the same virtual host.
-RewriteCond %{HTTPS} !=on [OR]
+# Canonical host: without www. HTTPS is terminated and enforced by the
+# hosting provider's front-end Nginx proxy; redirecting on Apache's HTTPS
+# value here would loop because the proxied request reaches Apache over HTTP.
 RewriteCond %{HTTP_HOST} !^mzissana\.ru$ [NC]
+RewriteRule ^ https://mzissana.ru%{REQUEST_URI} [R=301,L,NE]
+
+# Redirect plain HTTP only when the front-end proxy explicitly reports it.
+# This preserves HTTPS requests that reach Apache over the proxy's HTTP hop.
+RewriteCond %{HTTP:X-Forwarded-Proto} ^http$ [NC]
 RewriteRule ^ https://mzissana.ru%{REQUEST_URI} [R=301,L,NE]
 
 # Redirect directly requested prerender files without affecting internal rewrites.
 RewriteCond %{THE_REQUEST} \s/+index\.html[?\s] [NC]
-RewriteRule ^index\.html$ / [R=301,L]
+RewriteRule ^index\.html$ https://mzissana.ru/ [R=301,L,NE]
 RewriteCond %{THE_REQUEST} \s/+extra\.html[?\s] [NC]
-RewriteRule ^extra\.html$ /extra [R=301,L]
-RewriteCond %{THE_REQUEST} \s/+extra/(examind|oge-monologue|speaking-practice|oge-electronic-letter)\.html[?\s] [NC]
-RewriteRule ^extra/(examind|oge-monologue|speaking-practice|oge-electronic-letter)\.html$ /extra/$1 [R=301,L]
+RewriteRule ^extra\.html$ https://mzissana.ru/extra/ [R=301,L,NE]
+RewriteCond %{THE_REQUEST} \s/+extra/(examind|oge-monologue|oge-monologue-worksheet|speaking-practice|oge-electronic-letter)\.html[?\s] [NC]
+RewriteRule ^extra/(examind|oge-monologue|oge-monologue-worksheet|speaking-practice|oge-electronic-letter)\.html$ https://mzissana.ru/extra/$1 [R=301,L,NE]
 RewriteCond %{THE_REQUEST} \s/+(contacts|privacy)\.html[?\s] [NC]
-RewriteRule ^(contacts|privacy)\.html$ /$1 [R=301,L]
+RewriteRule ^(contacts|privacy)\.html$ https://mzissana.ru/$1 [R=301,L,NE]
 RewriteCond %{THE_REQUEST} \s/+(podgotovka-k-oge-po-angliyskomu|podgotovka-k-ege-po-angliyskomu|angliyskiy-dlya-shkolnikov|razgovornyy-angliyskiy-dlya-podrostkov)\.html[?\s] [NC]
-RewriteRule ^(podgotovka-k-oge-po-angliyskomu|podgotovka-k-ege-po-angliyskomu|angliyskiy-dlya-shkolnikov|razgovornyy-angliyskiy-dlya-podrostkov)\.html$ /$1 [R=301,L]
+RewriteRule ^(podgotovka-k-oge-po-angliyskomu|podgotovka-k-ege-po-angliyskomu|angliyskiy-dlya-shkolnikov|razgovornyy-angliyskiy-dlya-podrostkov)\.html$ https://mzissana.ru/$1 [R=301,L,NE]
+
+# /extra is also a physical directory containing prerendered child routes, so
+# its canonical URL keeps the slash Apache requires. Redirect explicitly to
+# avoid mod_dir generating a proxy-unaware http:// Location header.
+RewriteRule ^extra$ https://mzissana.ru/extra/ [R=301,L,NE]
 
 # Normalize alternate trailing-slash URLs to the canonical clean paths.
-RewriteRule ^extra/$ /extra [R=301,L]
-RewriteRule ^extra/(examind|oge-monologue|speaking-practice|oge-electronic-letter)/$ /extra/$1 [R=301,L]
-RewriteRule ^(contacts|privacy)/$ /$1 [R=301,L]
-RewriteRule ^(podgotovka-k-oge-po-angliyskomu|podgotovka-k-ege-po-angliyskomu|angliyskiy-dlya-shkolnikov|razgovornyy-angliyskiy-dlya-podrostkov)/$ /$1 [R=301,L]
+RewriteRule ^extra/(examind|oge-monologue|oge-monologue-worksheet|speaking-practice|oge-electronic-letter)/$ https://mzissana.ru/extra/$1 [R=301,L,NE]
+RewriteRule ^(contacts|privacy)/$ https://mzissana.ru/$1 [R=301,L,NE]
+RewriteRule ^(podgotovka-k-oge-po-angliyskomu|podgotovka-k-ege-po-angliyskomu|angliyskiy-dlya-shkolnikov|razgovornyy-angliyskiy-dlya-podrostkov)/$ https://mzissana.ru/$1 [R=301,L,NE]
 
 # Serve build-time prerendered pages at their clean canonical URLs.
-RewriteRule ^extra/?$ extra.html [L]
-RewriteRule ^extra/(examind|oge-monologue|speaking-practice|oge-electronic-letter)/?$ extra/$1.html [L]
+RewriteRule ^extra/$ extra.html [L]
+RewriteRule ^extra/(examind|oge-monologue|oge-monologue-worksheet|speaking-practice|oge-electronic-letter)/?$ extra/$1.html [L]
 RewriteRule ^(contacts|privacy)/?$ $1.html [L]
 RewriteRule ^(podgotovka-k-oge-po-angliyskomu|podgotovka-k-ege-po-angliyskomu|angliyskiy-dlya-shkolnikov|razgovornyy-angliyskiy-dlya-podrostkov)/?$ $1.html [L]
 

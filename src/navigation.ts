@@ -9,9 +9,10 @@ export const PAGE_PATHS: Record<PageKey, string> = {
   egePrep: '/podgotovka-k-ege-po-angliyskomu',
   schoolEnglish: '/angliyskiy-dlya-shkolnikov',
   teenSpeaking: '/razgovornyy-angliyskiy-dlya-podrostkov',
-  materials: '/extra',
+  materials: '/extra/',
   examind: '/extra/examind',
   ogeMonologue: '/extra/oge-monologue',
+  ogeMonologueWorksheet: '/extra/oge-monologue-worksheet',
   speakPractice: '/extra/speaking-practice',
   ogeElectronicLetter: '/extra/oge-electronic-letter',
   contacts: '/contacts',
@@ -24,7 +25,7 @@ export function routeHref(page: PageKey, hash?: string): string {
 
 export function pageFromPathname(pathname: string): PageKey | null {
   const normalizedPath = pathname.replace(/\/$/, '') || '/';
-  const entry = Object.entries(PAGE_PATHS).find(([, path]) => path === normalizedPath);
+  const entry = Object.entries(PAGE_PATHS).find(([, path]) => (path.replace(/\/$/, '') || '/') === normalizedPath);
   return (entry?.[0] as PageKey | undefined) ?? null;
 }
 

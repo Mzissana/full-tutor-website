@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500" role="img" aria-labelledby="title desc">
+  <title id="title">OGE monologue speaking practice</title>
+  <desc id="desc">A dark interface preview with a speaking timer, microphone and task prompt.</desc>
+
+  <rect width="800" height="500" fill="#0F172A"/>
+  <path d="M0 395C152 340 265 450 420 398C575 346 665 358 800 420V500H0V395Z" fill="#111D34"/>
+
+  <!-- The upper-left area is deliberately quiet so the website badges stay readable. -->
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="54" y="178" fill="#7C83FF" font-size="14" font-weight="700" letter-spacing="2.4">OGE TASK 3</text>
+    <text x="54" y="216" fill="#F5F7FF" font-size="28" font-weight="700">Speaking practice</text>
+    <text x="54" y="246" fill="#9BAACA" font-size="16">Build a clear monologue</text>
+    <text x="54" y="270" fill="#9BAACA" font-size="16">and practise with a timer.</text>
+
+    <rect x="54" y="309" width="258" height="102" rx="18" fill="#1D2A42" stroke="#34445F"/>
+    <text x="76" y="340" fill="#93A4C1" font-size="12" font-weight="700" letter-spacing="1.5">YOUR POINT</text>
+    <text x="76" y="371" fill="#D8E1F1" font-size="16">what your favourite subject is,</text>
+    <text x="76" y="395" fill="#D8E1F1" font-size="16">and why</text>
+  </g>
+
+  <!-- Timer uses the same restrained navy and periwinkle language as the mini app. -->
+  <circle cx="555" cy="244" r="122" fill="#131D33" stroke="#33415C" stroke-width="14"/>
+  <circle cx="555" cy="244" r="122" fill="none" stroke="#7C83FF" stroke-width="14" stroke-linecap="round" stroke-dasharray="590 177" transform="rotate(-92 555 244)"/>
+
+  <g fill="none" stroke="#8992FF" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="529" y="176" width="52" height="96" rx="26"/>
+    <path d="M511 238V248C511 272 531 292 555 292C579 292 599 272 599 248V238"/>
+    <path d="M555 292V319"/>
+    <path d="M532 319H578"/>
+  </g>
+
+  <g fill="#6F78DB">
+    <rect x="456" y="382" width="7" height="18" rx="3.5"/>
+    <rect x="470" y="375" width="7" height="32" rx="3.5"/>
+    <rect x="484" y="385" width="7" height="12" rx="3.5"/>
+    <rect x="498" y="368" width="7" height="46" rx="3.5"/>
+    <rect x="512" y="379" width="7" height="24" rx="3.5"/>
+    <rect x="526" y="389" width="7" height="8" rx="3.5"/>
+    <rect x="540" y="374" width="7" height="38" rx="3.5"/>
+    <rect x="554" y="362" width="7" height="62" rx="3.5" fill="#FF7395"/>
+    <rect x="568" y="377" width="7" height="32" rx="3.5"/>
+    <rect x="582" y="387" width="7" height="12" rx="3.5"/>
+    <rect x="596" y="371" width="7" height="42" rx="3.5"/>
+    <rect x="610" y="380" width="7" height="24" rx="3.5"/>
+    <rect x="624" y="386" width="7" height="12" rx="3.5"/>
+    <rect x="638" y="377" width="7" height="30" rx="3.5"/>
+    <rect x="652" y="383" width="7" height="18" rx="3.5"/>
+  </g>
+</svg>

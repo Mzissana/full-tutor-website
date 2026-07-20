@@ -42,8 +42,8 @@ export function OgeLetterWorksheetPage() {
         <div className="blob-2 absolute -left-16 top-32 h-56 w-56 bg-sky/20 opacity-50" />
         <div className="container-px py-10 sm:py-14">
           <div className="max-w-2xl">
-            <h1 className="font-display text-4xl font-extrabold leading-tight tracking-tight text-navy text-balance sm:text-5xl">Шаблон электронного письма ОГЭ</h1>
-            <p className="mt-5 text-lg leading-relaxed text-navy/70 text-pretty">Смотри структуру письма, сохраняй полезные фразы и скачивай рабочий лист для подготовки</p>
+            <h1 className="font-display text-4xl font-extrabold leading-tight tracking-tight text-navy text-balance sm:text-5xl">Электронное письмо ОГЭ по английскому: шаблон и пример</h1>
+            <p className="mt-5 text-lg leading-relaxed text-navy/70 text-pretty">Разберите структуру электронного письма, изучите полезные фразы и пример ответа, затем скачайте рабочий лист для подготовки.</p>
           </div>
         </div>
       </section>

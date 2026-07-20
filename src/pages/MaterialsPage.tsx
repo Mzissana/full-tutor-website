@@ -67,7 +67,11 @@ function MaterialCard({ material, index }: { material: Material; index: number }
               loading="lazy"
               decoding="async"
               className={`h-full w-full object-cover transition-transform duration-500 ${
-                material.id === 'examind' ? 'scale-[1.08]' : 'hover:scale-105'
+                material.id === 'examind'
+                  ? 'scale-[1.08]'
+                  : material.id === 'oge-monologue'
+                    ? 'object-center hover:scale-[1.02]'
+                    : 'hover:scale-105'
               }`}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-navy/30 to-transparent" />

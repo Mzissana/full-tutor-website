@@ -18,10 +18,10 @@ export function SpeakPracticePage() {
               ОГЭ · устная часть
             </span>
             <h1 className="font-display text-4xl font-extrabold leading-tight tracking-tight text-navy text-balance sm:text-5xl">
-              Ответы на вопросы ОГЭ
+              Устная часть ОГЭ по английскому: вопросы и тренажёр
             </h1>
             <p className="text-lg leading-relaxed text-navy/70 text-pretty">
-              Тренируйтесь отвечать на вопросы ОГЭ с таймером подготовки и записи ответа
+              Тренируйте ответы на вопросы экзаменатора с таймером и записью голоса, чтобы увереннее пройти устную часть ОГЭ по английскому языку.
             </p>
           </Reveal>
         </div>
@@ -33,7 +33,7 @@ export function SpeakPracticePage() {
             <div className="overflow-hidden rounded-[2rem] shadow-float ring-1 ring-navy/10">
               <iframe
                 src="/speak-practice.html"
-                title="Ответы на вопросы ОГЭ"
+                title="Тренажёр вопросов устной части ОГЭ по английскому"
                 className="block w-full border-0"
                 style={{ height: 'min(820px, calc(100vh - 7rem))', minHeight: '620px' }}
                 allow="microphone"

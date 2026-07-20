@@ -21,7 +21,8 @@ try {
     const html = template
       .replace(/<!--seo-start-->[\s\S]*?<!--seo-end-->/, `<!--seo-start-->\n    ${headHtml}\n    <!--seo-end-->`)
       .replace('<!--app-html-->', appHtml);
-    const output = route === '/' ? resolve(dist, 'index.html') : resolve(dist, `.${route}.html`);
+    const outputRoute = route.replace(/\/$/, '');
+    const output = route === '/' ? resolve(dist, 'index.html') : resolve(dist, `.${outputRoute}.html`);
     await mkdir(dirname(output), { recursive: true });
     await writeFile(output, html);
   }

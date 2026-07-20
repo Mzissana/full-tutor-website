@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import type { FormEvent } from 'react';
 import {
   Send,
@@ -13,6 +13,7 @@ import { Reveal } from '../components/Reveal';
 import { TelegramButton, VkButton } from '../components/TelegramButton';
 import { SITE } from '../config';
 import { contactEndpoint } from '../contactEndpoint';
+import { trackMetrikaGoal } from '../analytics';
 
 interface FormState {
   name: string;
@@ -30,10 +31,17 @@ const INFO_CARDS = [
 ];
 
 export function ContactsPage() {
+  const formStartTracked = useRef(false);
   const [form, setForm] = useState<FormState>(EMPTY);
   const [submitted, setSubmitted] = useState(false);
   const [isSending, setIsSending] = useState(false);
   const [error, setError] = useState('');
+
+  const trackFormStart = () => {
+    if (formStartTracked.current) return;
+    formStartTracked.current = true;
+    trackMetrikaGoal('form_start', { form_name: 'contact_form', placement: 'contacts_page' });
+  };
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -48,6 +56,7 @@ export function ContactsPage() {
       });
 
       if (!response.ok) throw new Error('Request failed');
+      trackMetrikaGoal('form_submit_success', { form_name: 'contact_form', placement: 'contacts_page' });
       setSubmitted(true);
     } catch {
       setError('Не удалось отправить сообщение. Пожалуйста, напишите мне в Telegram или ВКонтакте');
@@ -61,7 +70,7 @@ export function ContactsPage() {
   };
 
   const fieldBase =
-    'w-full rounded-2xl border-2 border-navy/10 bg-white px-4 py-3 text-base text-navy placeholder:text-navy/30 transition-colors focus:border-lavender focus:outline-none focus:ring-2 focus:ring-lavender/20';
+    'ym-disable-keys w-full rounded-2xl border-2 border-navy/10 bg-white px-4 py-3 text-base text-navy placeholder:text-navy/30 transition-colors focus:border-lavender focus:outline-none focus:ring-2 focus:ring-lavender/20';
 
   return (
     <main className="pt-24 sm:pt-28">
@@ -116,6 +125,7 @@ export function ContactsPage() {
                 rel="noopener noreferrer"
                 className="card card-tilt-l flex items-center gap-4 bg-navy p-5 text-white transition-transform hover:-translate-y-1"
                 aria-label="Написать в Telegram"
+                onClick={() => trackMetrikaGoal('telegram_click', { placement: 'contacts_quick_contact' })}
               >
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-butter/20 text-butter">
                   <Send className="h-6 w-6" />
@@ -151,7 +161,7 @@ export function ContactsPage() {
                   </button>
                 </div>
               ) : (
-                <form onSubmit={onSubmit} className="flex flex-col gap-5">
+                <form onSubmit={onSubmit} onFocusCapture={trackFormStart} className="flex flex-col gap-5">
                   <div>
                     <h2 className="font-display text-xl font-bold text-navy">Форма обратной связи</h2>
                     <p className="mt-1 text-sm text-navy/60">Заполните поля — и я свяжусь с вами</p>

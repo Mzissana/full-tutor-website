@@ -4,6 +4,7 @@ import { navigateFromLink, routeHref } from '../navigation';
 import { useRouter } from '../router';
 import { VkButton } from './TelegramButton';
 import { SiteLogo } from './SiteLogo';
+import { trackMetrikaGoal } from '../analytics';
 
 export function Footer() {
   const { navigate } = useRouter();
@@ -60,6 +61,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-butter px-5 py-2.5 text-sm"
+                onClick={() => trackMetrikaGoal('telegram_click', { placement: 'footer' })}
               >
                 <Send className="h-4 w-4" />
                 Написать в Telegram

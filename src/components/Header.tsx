@@ -39,7 +39,7 @@ export function Header() {
     if (
       link.page === 'materials' &&
       page !== null &&
-      ['examind', 'ogeMonologue', 'speakPractice', 'ogeElectronicLetter'].includes(page)
+      ['examind', 'ogeMonologue', 'ogeMonologueWorksheet', 'speakPractice', 'ogeElectronicLetter'].includes(page)
     ) return true;
     if (link.hash) return page === link.page && hash === link.hash;
     return page === link.page && !hash;

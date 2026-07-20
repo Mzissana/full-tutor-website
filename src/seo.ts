@@ -23,8 +23,8 @@ export interface PageSeo {
 
 const PAGE_COPY: Record<PageKey, { title: string; description: string }> = {
   home: {
-    title: 'MzissanaEnglish — английский для школьников',
-    description: 'Онлайн-занятия по английскому для школьников 5–11 классов: школьная программа, разговорная практика, подготовка к ОГЭ и ЕГЭ.',
+    title: 'Репетитор английского онлайн для школьников — MzissanaEnglish',
+    description: 'Индивидуальные онлайн-занятия английским для школьников 5–11 классов: школьная программа, уверенная речь, подготовка к ОГЭ и ЕГЭ.',
   },
   ogePrep: {
     title: 'Подготовка к ОГЭ по английскому языку онлайн — MzissanaEnglish',
@@ -35,12 +35,12 @@ const PAGE_COPY: Record<PageKey, { title: string; description: string }> = {
     description: 'Системная индивидуальная подготовка к ЕГЭ по английскому языку: чтение, аудирование, грамматика, лексика, письмо и устная часть.',
   },
   schoolEnglish: {
-    title: 'Английский для школьников 5–11 классов — MzissanaEnglish',
-    description: 'Индивидуальные онлайн-занятия английским для школьников 5–11 классов: помощь со школьной программой, грамматикой, лексикой и домашними заданиями.',
+    title: 'Английский для школьников 5–8 классов онлайн — MzissanaEnglish',
+    description: 'Индивидуальные онлайн-занятия английским для школьников 5–8 классов: школьная программа, грамматика, домашние задания и уверенная речь.',
   },
   teenSpeaking: {
-    title: 'Разговорный английский для подростков онлайн — MzissanaEnglish',
-    description: 'Онлайн-занятия разговорным английским для подростков: уверенная речь, понимание на слух, тематическая лексика и регулярная разговорная практика.',
+    title: 'Английский для подростков онлайн: разговорная практика',
+    description: 'Индивидуальный английский для подростков онлайн: меньше страха, больше живой речи, понятная грамматика и регулярная разговорная практика.',
   },
   materials: {
     title: 'Материалы по английскому языку — MzissanaEnglish',
@@ -51,16 +51,20 @@ const PAGE_COPY: Record<PageKey, { title: string; description: string }> = {
     description: 'Интерактивные ментальные карты с основной английской лексикой для устной и письменной частей ОГЭ.',
   },
   ogeMonologue: {
-    title: 'Практика монологов ОГЭ — MzissanaEnglish',
-    description: 'Тренажёр монологов ОГЭ по английскому: карточки с темами, структура ответа, таймеры и пробная экзаменационная сессия.',
+    title: 'Монолог ОГЭ по английскому: план, темы и тренажёр',
+    description: 'Тренажёр монолога ОГЭ по английскому языку: план ответа, темы, критерии, карточки и таймер для подготовки к заданию 3 устной части.',
+  },
+  ogeMonologueWorksheet: {
+    title: 'Монолог ОГЭ по английскому: критерии и рабочий лист',
+    description: 'Структура задания 3 ОГЭ, логические переходы, критерии ФИПИ 2026, пример монолога, пять упражнений и таймер для устной практики.',
   },
   speakPractice: {
-    title: 'Ответы на вопросы ОГЭ — MzissanaEnglish',
-    description: 'Интерактивная практика ответов на вопросы устной части ОГЭ по английскому языку с таймером и записью голоса.',
+    title: 'Устная часть ОГЭ по английскому: вопросы и тренажёр',
+    description: 'Тренажёр устной части ОГЭ по английскому языку: вопросы экзаменатора, таймер, запись голоса и практика развёрнутых ответов.',
   },
   ogeElectronicLetter: {
-    title: 'Шаблон электронного письма ОГЭ — MzissanaEnglish',
-    description: 'Структура электронного письма ОГЭ по английскому языку, полезные фразы, пример ответа и рабочий лист для скачивания.',
+    title: 'Электронное письмо ОГЭ по английскому: шаблон и пример',
+    description: 'Электронное письмо ОГЭ по английскому языку: актуальная структура, шаблон, полезные фразы, пример ответа и рабочий лист для скачивания.',
   },
   contacts: {
     title: 'Контакты преподавателя английского — MzissanaEnglish',
@@ -75,8 +79,9 @@ const PAGE_COPY: Record<PageKey, { title: string; description: string }> = {
 export function getPageSeo(page: PageKey): PageSeo {
   const copy = PAGE_COPY[page];
   const canonicalUrl = `${SITE_ORIGIN}${PAGE_PATHS[page]}`;
+  const isWorksheet = page === 'ogeMonologueWorksheet';
   const pageEntity = {
-    '@type': page === 'materials' ? 'CollectionPage' : page === 'contacts' ? 'ContactPage' : 'WebPage',
+    '@type': isWorksheet ? ['WebPage', 'LearningResource'] : page === 'materials' ? 'CollectionPage' : page === 'contacts' ? 'ContactPage' : 'WebPage',
     '@id': `${canonicalUrl}#webpage`,
     url: canonicalUrl,
     name: copy.title,
@@ -84,6 +89,12 @@ export function getPageSeo(page: PageKey): PageSeo {
     isPartOf: { '@id': `${SITE_ORIGIN}/#website` },
     ...(page === 'home' ? { about: { '@id': `${SITE_ORIGIN}/#organization` } } : {}),
     inLanguage: 'ru',
+    ...(isWorksheet ? {
+      learningResourceType: 'Worksheet',
+      educationalLevel: '9 класс',
+      teaches: 'Монологическое высказывание в задании 3 устной части ОГЭ по английскому языку',
+      isAccessibleForFree: true,
+    } : {}),
   };
   const organizationEntity = {
     '@type': 'Organization',

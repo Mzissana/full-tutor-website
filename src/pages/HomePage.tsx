@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import type { FormEvent } from 'react';
 import {
   BookOpen,
@@ -18,7 +18,6 @@ import {
   ShieldCheck,
   ArrowRight,
   Quote,
-  Star,
   Send,
   User,
   Target,
@@ -33,6 +32,7 @@ import type { PageKey } from '../config';
 import { contactEndpoint } from '../contactEndpoint';
 import { navigateFromLink, routeHref } from '../navigation';
 import { useRouter } from '../router';
+import { trackMetrikaGoal } from '../analytics';
 
 /* ---------------- Hero ---------------- */
 
@@ -58,20 +58,20 @@ function Hero() {
           <Reveal>
             <span className="eyebrow bg-mint/30 text-navy">
               <Sparkles className="h-4 w-4 text-navy" />
-              Английский для школьников
+              Репетитор английского онлайн
             </span>
           </Reveal>
 
           <Reveal delay={80}>
             <h1 className="font-display text-4xl font-extrabold leading-[1.08] tracking-tight text-navy text-balance sm:text-5xl lg:text-6xl">
-              Английский язык для школьников 5–11 классов
+              Английский для школьников, где знания начинают работать
             </h1>
           </Reveal>
 
           <Reveal delay={160}>
             <p className="max-w-xl text-lg leading-relaxed text-navy/70 text-pretty">
-              Помогаю уверенно говорить по-английски, справляться со школьной программой и готовиться
-              к ОГЭ и ЕГЭ
+              Индивидуальные онлайн-занятия для 5–11 классов: закрываем пробелы,
+              развиваем уверенную речь и системно готовимся к ОГЭ и ЕГЭ
             </p>
           </Reveal>
 
@@ -179,11 +179,11 @@ function Audience() {
 /* ---------------- Directions ---------------- */
 
 const DIRECTIONS: { icon: typeof BookOpen; title: string; desc: string; bg: string; hoverBg: string; page?: PageKey }[] = [
-  { icon: BookOpen, title: 'Английский для школы', desc: 'Помощь с программой и домашними заданиями', bg: 'bg-lavender/30', hoverBg: 'hover:bg-wash-lavender', page: 'schoolEnglish' },
+  { icon: BookOpen, title: 'Английский для школьников 5–8 классов', desc: 'Школьная программа, грамматика и уверенная речь', bg: 'bg-lavender/30', hoverBg: 'hover:bg-wash-lavender', page: 'schoolEnglish' },
   { icon: ClipboardCheck, title: 'Подготовка к ВПР', desc: 'Отработка формата и ключевых тем ВПР', bg: 'bg-sky/30', hoverBg: 'hover:bg-wash-sky' },
   { icon: PenLine, title: 'Подготовка к ОГЭ', desc: 'Все разделы экзамена и устная часть', bg: 'bg-blush/30', hoverBg: 'hover:bg-wash-blush', page: 'ogePrep' },
   { icon: GraduationCap, title: 'Подготовка к ЕГЭ', desc: 'Письмо, чтение, аудирование и говорение', bg: 'bg-butter/30', hoverBg: 'hover:bg-wash-butter', page: 'egePrep' },
-  { icon: MessagesSquare, title: 'Разговорный английский', desc: 'Развиваем беглость и понимание на слух', bg: 'bg-mint/30', hoverBg: 'hover:bg-wash-mint', page: 'teenSpeaking' },
+  { icon: MessagesSquare, title: 'Английский для подростков онлайн', desc: 'Разговорная практика без страха и понятная грамматика', bg: 'bg-mint/30', hoverBg: 'hover:bg-wash-mint', page: 'teenSpeaking' },
 ];
 
 function Directions() {
@@ -390,7 +390,7 @@ function Reviews() {
           {REVIEWS.map((r, i) => {
             const isPink = i % 2 === 0;
             return (
-              <Reveal key={r.author + r.year} delay={(i % 3) * 100} as="article">
+              <Reveal key={r.id} delay={(i % 3) * 100} as="article">
                 <figure className={`card ${i % 2 === 0 ? 'card-tilt-r' : 'card-tilt-l'} flex h-full flex-col p-6 ${isPink ? 'bg-blush/15' : 'bg-white'}`}>
                   <Quote className="h-8 w-8 text-butter" />
                   <blockquote className="mt-3 flex-1 text-pretty text-base leading-relaxed text-navy">
@@ -402,12 +402,7 @@ function Reviews() {
                     </div>
                     <div>
                       <p className="text-sm font-bold text-navy">{r.author}</p>
-                      <p className="text-xs text-navy/50">{r.subject}, {r.year}</p>
-                    </div>
-                    <div className="ml-auto flex gap-0.5 text-butter">
-                      {Array.from({ length: 5 }).map((_, s) => (
-                        <Star key={s} className="h-3.5 w-3.5 fill-butter text-butter" />
-                      ))}
+                      <p className="text-xs text-navy/50">{r.subject}</p>
                     </div>
                   </figcaption>
                 </figure>
@@ -597,12 +592,19 @@ function FinalCta() {
 /* ---------------- Contact form ---------------- */
 
 export function HomeContactForm() {
+  const formStartTracked = useRef(false);
   const [submitted, setSubmitted] = useState(false);
   const [isSending, setIsSending] = useState(false);
   const [error, setError] = useState('');
   const [form, setForm] = useState({ name: '', grade: '', goal: '', message: '' });
   const fieldBase =
-    'w-full rounded-2xl border-2 border-navy/10 bg-white px-4 py-3 text-base text-navy placeholder:text-navy/30 transition-colors focus:border-lavender focus:outline-none focus:ring-2 focus:ring-lavender/20';
+    'ym-disable-keys w-full rounded-2xl border-2 border-navy/10 bg-white px-4 py-3 text-base text-navy placeholder:text-navy/30 transition-colors focus:border-lavender focus:outline-none focus:ring-2 focus:ring-lavender/20';
+
+  const trackFormStart = () => {
+    if (formStartTracked.current) return;
+    formStartTracked.current = true;
+    trackMetrikaGoal('form_start', { form_name: 'contact_form', placement: 'page_section' });
+  };
 
   const submit = async (event: FormEvent) => {
     event.preventDefault();
@@ -617,6 +619,7 @@ export function HomeContactForm() {
       });
 
       if (!response.ok) throw new Error('Request failed');
+      trackMetrikaGoal('form_submit_success', { form_name: 'contact_form', placement: 'page_section' });
       setSubmitted(true);
     } catch {
       setError('Не удалось отправить сообщение. Пожалуйста, напишите мне в Telegram или ВКонтакте');
@@ -649,7 +652,7 @@ export function HomeContactForm() {
                 </button>
               </div>
             ) : (
-              <form onSubmit={submit} className="flex flex-col gap-5">
+              <form onSubmit={submit} onFocusCapture={trackFormStart} className="flex flex-col gap-5">
                 <div>
                   <h2 className="font-display text-xl font-bold text-navy">Форма обратной связи</h2>
                   <p className="mt-1 text-sm text-navy/60">Заполните поля — и я свяжусь с вами</p>

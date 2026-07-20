@@ -92,3 +92,32 @@ body {
   .bg-wash-peach    { background-color: #FEF3EC; }
   .bg-wash-blush    { background-color: #FEF0F3; }
 }
+
+@media print {
+  @page { size: A4; margin: 12mm; }
+  body { background: white !important; }
+  body > #root > div > header,
+  body > #root > div > footer,
+  .worksheet-no-print { display: none !important; }
+  .worksheet-page { padding-top: 0 !important; }
+  .worksheet-page > section:first-child { display: none !important; }
+  .worksheet-shell {
+    overflow: visible !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    --tw-ring-shadow: none !important;
+  }
+  .worksheet-content {
+    max-width: none !important;
+    padding: 0 !important;
+    background: white !important;
+  }
+  .worksheet-card {
+    break-inside: avoid;
+    box-shadow: none !important;
+  }
+  .worksheet-page * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

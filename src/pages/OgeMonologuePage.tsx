@@ -18,10 +18,10 @@ export function OgeMonologuePage() {
               ОГЭ · задание 3
             </span>
             <h1 className="font-display text-4xl font-extrabold leading-tight tracking-tight text-navy text-balance sm:text-5xl">
-              Практика монологов ОГЭ
+              Монолог ОГЭ по английскому: план, темы и тренажёр
             </h1>
             <p className="text-lg leading-relaxed text-navy/70 text-pretty">
-              Тренируйте монологическое высказывание по карточкам ОГЭ: разбирайте структуру ответа, говорите с таймером и проходите пробную экзаменационную сессию.
+              Готовьтесь к заданию 3 устной части: изучите план монолога, выбирайте темы ОГЭ, отвечайте по карточкам и тренируйтесь с таймером.
             </p>
           </Reveal>
         </div>
@@ -33,7 +33,7 @@ export function OgeMonologuePage() {
             <div className="overflow-hidden rounded-[2rem] shadow-float ring-1 ring-navy/10">
               <iframe
                 src="/oge-monologue.html"
-                title="Практика монологов ОГЭ"
+                title="Тренажёр монолога ОГЭ по английскому"
                 className="block w-full border-0"
                 style={{ height: 'min(820px, calc(100vh - 7rem))', minHeight: '620px' }}
                 allow="microphone"
